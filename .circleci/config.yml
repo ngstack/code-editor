@@ -17,9 +17,7 @@ jobs:
       - save_cache:
           key: ngstack-core-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
-            - "node_modules"
+            - 'node_modules'
 
       - run: npm run spellcheck
-      - run: xvfb-run -a npm test -- translate --watch=false
       - run: xvfb-run -a npm test -- code-editor --watch=false
-      - run: xvfb-run -a npm test -- electron --watch=false
