@@ -1,0 +1,28 @@
+{
+  "name": "@ngstack/code-editor",
+  "description": "Code editor component for Angular applications.",
+  "version": "0.3.0",
+  "license": "MIT",
+  "author": {
+    "name": "Denys Vuika",
+    "email": "denys.vuika@gmail.com",
+    "url": "https://medium.com/@DenysVuika"
+  },
+  "keywords": [
+    "angular",
+    "monaco",
+    "editor"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ngstack/core.git"
+  },
+  "homepage": "https://github.com/ngstack/core/tree/master/projects/code-editor",
+  "bugs": {
+    "url": "https://github.com/ngstack/core/issues"
+  },
+  "peerDependencies": {
+    "@angular/common": "^6.0.0",
+    "@angular/core": "^6.0.0"
+  }
+}

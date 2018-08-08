@@ -1,0 +1,17 @@
+<h3>Translate</h3>
+
+<button mat-raised-button (click)="changeLang('en')">EN</button>
+<button mat-raised-button (click)="changeLang('fr')">FR</button>
+<button mat-raised-button (click)="changeLang('unknown')">Unknown</button>
+
+<p>
+  {{ 'TITLE' | translate }}
+</p>
+
+<p>
+  Formatted: {{ 'FORMATTED.HELLO_MESSAGE' | translate:{ 'username': 'world' } }}
+</p>
+
+<p>
+  Custom Pipe: {{ 'TITLE' | myTranslate }}
+</p>

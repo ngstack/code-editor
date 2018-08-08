@@ -1,0 +1,30 @@
+<h3>Code Editor</h3>
+
+<div>
+  <mat-form-field>
+    <mat-select placeholder="Theme" [(value)]="activeTheme">
+      <mat-option *ngFor="let theme of themes" [value]="theme.value">
+        {{ theme.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div>
+  <mat-form-field>
+    <mat-select [placeholder]="'Language'" [(value)]="selectedDemo" (selectionChange)="onDemoChanged($event)">
+      <mat-option *ngFor="let demo of demos" [value]="demo">
+        {{ demo.language }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<input type="file" #file style="display: none" accept=".ts, .js" (change)="onFileSelected($event)">
+<button mat-raised-button (click)="onLoadClicked()">Load</button>
+
+<div>
+  <ngs-code-editor [language]="selectedDemo.language" [theme]="activeTheme" [(value)]="code" [dependencies]="dependencies"
+    [options]="options" (valueChanged)="onCodeChanged($event)">
+  </ngs-code-editor>
+</div>
