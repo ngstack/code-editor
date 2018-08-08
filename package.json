@@ -12,11 +12,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "spellcheck": "cspell 'src/**/*.ts' 'e2e/**/*.ts' 'projects/**/*.ts'",
-    "build:translate": "ng build translate",
-    "build:electron": "ng build electron",
     "build:code-editor": "ng build code-editor && cp -R projects/code-editor/src/lib/workers dist/@ngstack/code-editor",
-    "prod:translate": "ng build translate --prod",
-    "prod:electron": "ng build electron --prod",
     "prod:code-editor": "ng build code-editor --prod && cp -R projects/code-editor/src/lib/workers dist/@ngstack/code-editor"
   },
   "private": true,

@@ -34,8 +34,7 @@
             ],
             "styles": [
               {
-                "input":
-                  "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+                "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
               },
               "src/styles.css"
             ],
@@ -87,8 +86,7 @@
             "karmaConfig": "src/karma.conf.js",
             "styles": [
               {
-                "input":
-                  "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+                "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
               },
               "src/styles.css"
             ],
@@ -120,44 +118,6 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**"]
-          }
-        }
-      }
-    },
-    "translate": {
-      "root": "projects/translate",
-      "sourceRoot": "projects/translate/src",
-      "projectType": "library",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/translate/tsconfig.lib.json",
-            "project": "projects/translate/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "project": "projects/translate/ng-package.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/translate/src/test.ts",
-            "tsConfig": "projects/translate/tsconfig.spec.json",
-            "karmaConfig": "projects/translate/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/translate/tsconfig.lib.json",
-              "projects/translate/tsconfig.spec.json"
-            ],
             "exclude": ["**/node_modules/**"]
           }
         }
@@ -195,44 +155,6 @@
             "tsConfig": [
               "projects/code-editor/tsconfig.lib.json",
               "projects/code-editor/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
-          }
-        }
-      }
-    },
-    "electron": {
-      "root": "projects/electron",
-      "sourceRoot": "projects/electron/src",
-      "projectType": "library",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/electron/tsconfig.lib.json",
-            "project": "projects/electron/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "project": "projects/electron/ng-package.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/electron/src/test.ts",
-            "tsConfig": "projects/electron/tsconfig.spec.json",
-            "karmaConfig": "projects/electron/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/electron/tsconfig.lib.json",
-              "projects/electron/tsconfig.spec.json"
             ],
             "exclude": ["**/node_modules/**"]
           }
