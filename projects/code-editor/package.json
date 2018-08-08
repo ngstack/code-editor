@@ -15,11 +15,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ngstack/core.git"
+    "url": "https://github.com/ngstack/code-editor.git"
   },
-  "homepage": "https://github.com/ngstack/core/tree/master/projects/code-editor",
+  "homepage": "https://github.com/ngstack/code-editor",
   "bugs": {
-    "url": "https://github.com/ngstack/core/issues"
+    "url": "https://github.com/ngstack/code-editor/issues"
   },
   "peerDependencies": {
     "@angular/common": "^6.0.0",
