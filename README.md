@@ -1,5 +1,7 @@
 # @ngstack/code-editor
 
+[![CircleCI](https://circleci.com/gh/ngstack/code-editor.svg?style=svg)](https://circleci.com/gh/ngstack/code-editor)
+
 Code editor component for Angular applications.
 
 Based on the [Monaco](https://www.npmjs.com/package/monaco-editor) editor
@@ -48,7 +50,8 @@ Update component controller class and provide corresponding properties and event
 
 ```ts
 export class AppComponent {
-  @Input() code = 'var x = 1;';
+  @Input()
+  code = 'var x = 1;';
 
   options = {
     contextmenu: true,
@@ -211,4 +214,3 @@ use `CodeEditorModule.forRoot()` in the main application,
 and `CodeEditorModule.forChild()` in all lazy-loaded feature modules.
 
 For more details please refer to [Lazy Loading Feature Modules](https://angular.io/guide/lazy-loading-ngmodules)
-
