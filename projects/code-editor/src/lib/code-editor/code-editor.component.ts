@@ -18,6 +18,7 @@ import { CodeEditorService } from '../services/code-editor.service';
 import { TypescriptDefaultsService } from '../services/typescript-defaults.service';
 import { JavascriptDefaultsService } from '../services/javascript-defaults.service';
 import { JsonDefaultsService } from '../services/json-defaults.service';
+import { CodeModel } from '../models/code.model';
 
 declare const monaco: any;
 
@@ -33,8 +34,8 @@ declare const monaco: any;
 export class CodeEditorComponent
   implements OnInit, OnChanges, OnDestroy, AfterViewInit {
   private _editor: any;
-  private model: any;
-  private _value = '';
+  private _model: any;
+  // private _value = '';
 
   private defaultOptions = {
     lineNumbers: true,
@@ -46,20 +47,24 @@ export class CodeEditorComponent
 
   private subscriptions: Subscription[] = [];
 
-  @ViewChild('editor') editorContent: ElementRef;
+  @ViewChild('editor')
+  editorContent: ElementRef;
 
   @Input()
-  set value(v: string) {
-    if (v !== this._value) {
-      this._value = v;
-      this.setEditorValue(v);
-      this.valueChanged.emit(v);
-    }
-  }
+  codeModel: CodeModel;
 
-  get value(): string {
-    return this._value;
-  }
+  // @Input()
+  // set value(v: string) {
+  //   if (v !== this._value) {
+  //     this._value = v;
+  //     this.setEditorValue(v);
+  //     this.valueChanged.emit(v);
+  //   }
+  // }
+
+  // get value(): string {
+  //   return this._value;
+  // }
 
   /**
    * Editor theme. Defaults to `vs`.
@@ -67,14 +72,8 @@ export class CodeEditorComponent
    * Allowed values: `vs`, `vs-dark` or `hc-black`.
    * @memberof CodeEditorComponent
    */
-  @Input() theme = 'vs';
-
-  /**
-   * Editor language. Defaults to `typescript`.
-   *
-   * @memberof CodeEditorComponent
-   */
-  @Input() language = 'typescript';
+  @Input()
+  theme = 'vs';
 
   /**
    * Editor options.
@@ -83,18 +82,19 @@ export class CodeEditorComponent
    *
    * @memberof CodeEditorComponent
    */
-  @Input() options = {};
+  @Input()
+  options = {};
 
   /**
    * Toggle readonly state of the editor.
    *
    * @memberof CodeEditorComponent
    */
-  @Input() readOnly = false;
+  @Input()
+  readOnly = false;
 
-  @Input() dependencies: string[] = [];
-
-  @Output() valueChanged = new EventEmitter<string>();
+  @Output()
+  valueChanged = new EventEmitter<string>();
 
   constructor(
     private editorService: CodeEditorService,
@@ -114,24 +114,15 @@ export class CodeEditorComponent
       this._editor = null;
     }
 
-    if (this.model) {
-      this.model.dispose();
-      this.model = null;
+    if (this._model) {
+      this._model.dispose();
+      this._model = null;
     }
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.value && !changes.value.firstChange) {
-      this.setEditorValue(changes.value.currentValue);
-    }
-
-    if (changes.language && !changes.language.firstChange) {
-      if (this._editor) {
-        monaco.editor.setModelLanguage(
-          this.model,
-          changes.language.currentValue
-        );
-      }
+    if (changes.codeModel && !changes.codeModel.firstChange) {
+      this.updateModel(changes.codeModel.currentValue);
     }
 
     if (changes.readOnly && !changes.readOnly.firstChange) {
@@ -149,52 +140,39 @@ export class CodeEditorComponent
 
   async ngAfterViewInit() {
     await this.editorService.loadEditor();
-    this.initMonaco();
+    this.setupEditor();
   }
 
-  private initMonaco() {
+  private setupEditor() {
     const domElement: HTMLDivElement = this.editorContent.nativeElement;
+    const { value, language, uri } = this.codeModel;
 
-    let uri = null;
-
-    if (this.language) {
-      switch (this.language.toLowerCase()) {
-        case 'typescript':
-          uri = monaco.Uri.file('main.ts');
-          break;
-        case 'javascript':
-          uri = monaco.Uri.file('main.js');
-          break;
-        case 'json':
-          uri = monaco.Uri.file('main.json');
-          break;
-        default:
-          break;
-      }
-    }
-
-    this.model = monaco.editor.createModel(this.value, this.language, uri);
+    this._model = monaco.editor.createModel(
+      value,
+      language,
+      monaco.Uri.file(uri || 'code')
+    );
 
     const options = Object.assign({}, this.defaultOptions, this.options, {
       readOnly: this.readOnly,
       theme: this.theme,
-      model: this.model
+      model: this._model
     });
 
     this._editor = monaco.editor.create(domElement, options);
 
-    this.model.onDidChangeContent(e => {
-      const newValue = this.model.getValue();
-      if (this._value !== newValue) {
-        this._value = newValue;
-        this.valueChanged.emit(newValue);
+    this._model.onDidChangeContent(e => {
+      const newValue = this._model.getValue();
+      if (this.codeModel) {
+        this.codeModel.value = newValue;
       }
+      this.valueChanged.emit(newValue);
     });
 
-    if (this.language) {
-      const lang = this.language.toLowerCase();
+    if (language && this.codeModel.dependencies) {
+      const lang = language.toLowerCase();
       if (lang === 'typescript' || lang === 'javascript') {
-        this.editorService.loadTypings(this.dependencies);
+        this.editorService.loadTypings(this.codeModel.dependencies);
       }
     }
   }
@@ -202,9 +180,21 @@ export class CodeEditorComponent
   private setEditorValue(value: any): void {
     // Fix for value change while dispose in process.
     setTimeout(() => {
-      if (this.model) {
-        this.model.setValue(this.value);
+      if (this._model) {
+        this._model.setValue(value);
       }
     });
+  }
+
+  private updateModel(model: CodeModel) {
+    this.setEditorValue(model.value);
+    monaco.editor.setModelLanguage(this._model, model.language);
+
+    if (model.language && model.dependencies) {
+      const lang = model.language.toLowerCase();
+      if (lang === 'typescript' || lang === 'javascript') {
+        this.editorService.loadTypings(model.dependencies);
+      }
+    }
   }
 }

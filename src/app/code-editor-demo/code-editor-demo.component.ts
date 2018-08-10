@@ -6,6 +6,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
+import { CodeModel } from '@ngstack/code-editor';
 
 @Component({
   selector: 'app-code-editor-demo',
@@ -20,11 +21,12 @@ export class CodeEditorDemoComponent {
     { name: 'High Contrast Dark', value: 'hc-black' }
   ];
 
-  demos = [
+  demos: Array<CodeModel> = [
     {
-      id: 'typescript',
       language: 'typescript',
-      code: `
+      uri: 'main.ts',
+      dependencies: ['@ngstack/translate', '@ngstack/code-editor'],
+      value: `
         // TypeScript Example
         import { TranslateModule, TranslateService } from '@ngstack/translate';
         import { CodeEditorModule } from '@ngstack/code-editor';
@@ -38,9 +40,10 @@ export class CodeEditorDemoComponent {
       `
     },
     {
-      id: 'javascript',
       language: 'javascript',
-      code: `
+      uri: 'main.js',
+      dependencies: ['@types/node'],
+      value: `
         // JavaScript Example
         import * as fs from 'fs';
 
@@ -53,9 +56,9 @@ export class CodeEditorDemoComponent {
       `
     },
     {
-      id: 'json',
       language: 'json',
-      code: [
+      uri: 'main.json',
+      value: [
         '{',
         '    "$schema": "http://myserver/foo-schema.json",',
         '    "p1": "v3",',
@@ -65,12 +68,13 @@ export class CodeEditorDemoComponent {
     }
   ];
 
-  selectedDemo = this.demos[2];
+  selectedModel = this.demos[2];
+  activeTheme = 'vs';
+  code = this.demos[2].value;
+  readOnly = false;
 
-  @Input() activeTheme = 'vs';
-  @Input() code = this.demos[2].code;
-  @Input() readOnly = false;
-  @ViewChild('file') fileInput: ElementRef;
+  @ViewChild('file')
+  fileInput: ElementRef;
 
   options = {
     contextmenu: true,
@@ -79,34 +83,29 @@ export class CodeEditorDemoComponent {
     }
   };
 
-  dependencies: string[] = [
-    '@types/node',
-    '@ngstack/translate',
-    '@ngstack/code-editor'
-  ];
-
   onCodeChanged(value) {
-    // console.log('CODE', this.code);
+    // console.log('CODE', value);
   }
 
   onLoadClicked() {
     this.fileInput.nativeElement.click();
   }
 
-  onFileSelected(event) {
-    const files: FileList = event.target.files;
-    if (files && files.length > 0) {
-      const file = files.item(0);
-      const reader = new FileReader();
+  // onFileSelected(event) {
+  //   const files: FileList = event.target.files;
+  //   if (files && files.length > 0) {
+  //     const file = files.item(0);
+  //     const reader = new FileReader();
 
-      reader.onloadend = () => {
-        this.code = reader.result;
-      };
-      reader.readAsText(file);
-    }
-  }
+  //     reader.onloadend = () => {
+  //       this.code = reader.result;
+  //     };
+  //     reader.readAsText(file);
+  //   }
+  // }
 
   onDemoChanged(event: MatSelectChange) {
-    this.code = event.value.code;
+    const model: CodeModel = event.value;
+    this.code = model.value;
   }
 }

@@ -11,7 +11,7 @@ import { CodeEditorDemoComponent } from './code-editor-demo/code-editor-demo.com
 
 const routes: Route[] = [
   {
-    path: 'code-editor',
+    path: '',
     component: CodeEditorDemoComponent
   }
 ];
