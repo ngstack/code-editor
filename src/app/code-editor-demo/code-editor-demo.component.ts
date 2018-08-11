@@ -1,20 +1,28 @@
 import {
   Component,
-  Input,
   ViewChild,
   ElementRef,
-  ViewEncapsulation
+  ViewEncapsulation,
+  OnInit
 } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
 import { CodeModel } from '@ngstack/code-editor';
+import { NestedTreeControl } from '@angular/cdk/tree';
+import { MatTreeNestedDataSource } from '@angular/material/tree';
+import { FileNode } from './file-node';
+import { FileDatabase } from './file-database';
 
 @Component({
   selector: 'app-code-editor-demo',
   templateUrl: './code-editor-demo.component.html',
   styleUrls: ['./code-editor-demo.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers: [FileDatabase]
 })
-export class CodeEditorDemoComponent {
+export class CodeEditorDemoComponent implements OnInit {
+  nestedTreeControl: NestedTreeControl<FileNode>;
+  nestedDataSource: MatTreeNestedDataSource<FileNode>;
+
   themes = [
     { name: 'Visual Studio', value: 'vs' },
     { name: 'Visual Studio Dark', value: 'vs-dark' },
@@ -83,6 +91,17 @@ export class CodeEditorDemoComponent {
     }
   };
 
+  constructor(database: FileDatabase) {
+    this.nestedTreeControl = new NestedTreeControl<FileNode>(this._getChildren);
+    this.nestedDataSource = new MatTreeNestedDataSource();
+
+    database.dataChange.subscribe(data => (this.nestedDataSource.data = data));
+  }
+
+  hasNestedChild = (_: number, nodeData: FileNode) => !nodeData.type;
+
+  private _getChildren = (node: FileNode) => node.children;
+
   onCodeChanged(value) {
     // console.log('CODE', value);
   }
@@ -108,4 +127,6 @@ export class CodeEditorDemoComponent {
     const model: CodeModel = event.value;
     this.code = model.value;
   }
+
+  ngOnInit() {}
 }
