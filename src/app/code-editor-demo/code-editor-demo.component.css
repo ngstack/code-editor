@@ -17,3 +17,8 @@
 .example-tree .mat-icon-button[disabled] {
   display: none;
 }
+
+.example-tree .file-node-label {
+  cursor: pointer;
+  user-select: none;
+}

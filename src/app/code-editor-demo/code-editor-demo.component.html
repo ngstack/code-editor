@@ -4,8 +4,6 @@
   </button>
 
   <mat-menu #mnuTheme="matMenu">
-    <button mat-menu-item>Settings</button>
-    <button mat-menu-item>Help</button>
     <button *ngFor="let theme of themes" mat-menu-item (click)="activeTheme = theme.value">
       {{ theme.name }}
     </button>
@@ -47,7 +45,7 @@
                       {{nestedTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                     </mat-icon>
                   </button>
-                  {{node.filename}}
+                  <span class="file-node-label" (click)="nestedTreeControl.toggle(node)">{{node.filename}}</span>
                 </div>
                 <ul [class.example-tree-invisible]="!nestedTreeControl.isExpanded(node)">
                   <ng-container matTreeNodeOutlet></ng-container>
