@@ -15,7 +15,7 @@ import { FileDatabase } from './file-database';
 @Component({
   selector: 'app-code-editor-demo',
   templateUrl: './code-editor-demo.component.html',
-  styleUrls: ['./code-editor-demo.component.css'],
+  styleUrls: ['./code-editor-demo.component.scss'],
   encapsulation: ViewEncapsulation.None,
   providers: [FileDatabase]
 })
@@ -109,19 +109,6 @@ export class CodeEditorDemoComponent implements OnInit {
   onLoadClicked() {
     this.fileInput.nativeElement.click();
   }
-
-  // onFileSelected(event) {
-  //   const files: FileList = event.target.files;
-  //   if (files && files.length > 0) {
-  //     const file = files.item(0);
-  //     const reader = new FileReader();
-
-  //     reader.onloadend = () => {
-  //       this.code = reader.result;
-  //     };
-  //     reader.readAsText(file);
-  //   }
-  // }
 
   onDemoChanged(event: MatSelectChange) {
     const model: CodeModel = event.value;

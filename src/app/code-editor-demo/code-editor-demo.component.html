@@ -1,34 +1,33 @@
-<mat-toolbar [color]="'primary'">
-  <button mat-icon-button [matMenuTriggerFor]="mnuTheme">
-    <mat-icon>format_color_fill</mat-icon>
-  </button>
-
-  <mat-menu #mnuTheme="matMenu">
-    <button *ngFor="let theme of themes" mat-menu-item (click)="activeTheme = theme.value">
-      {{ theme.name }}
-    </button>
-  </mat-menu>
-
-  <div>
-    <mat-form-field>
-      <mat-select
-        [(value)]="selectedModel"
-        (selectionChange)="onDemoChanged($event)">
-        <mat-option *ngFor="let model of demos" [value]="model">
-          {{ model.language }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-</mat-toolbar>
-
-<!-- <input type="file" #file style="display: none" accept=".ts, .js" (change)="onFileSelected($event)"> -->
-<!-- <button mat-raised-button (click)="onLoadClicked()">Load</button> -->
-
 <div fxLayout="column" fxFill>
+
+  <mat-toolbar [color]="'primary'">
+    <button mat-icon-button [matMenuTriggerFor]="mnuTheme">
+      <mat-icon>format_color_fill</mat-icon>
+    </button>
+
+    <mat-menu #mnuTheme="matMenu">
+      <button *ngFor="let theme of themes" mat-menu-item (click)="activeTheme = theme.value">
+        {{ theme.name }}
+      </button>
+    </mat-menu>
+
+    <div>
+      <mat-form-field>
+        <mat-select
+          [(value)]="selectedModel"
+          (selectionChange)="onDemoChanged($event)">
+          <mat-option *ngFor="let model of demos" [value]="model">
+            {{ model.language }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-toolbar>
+
   <div fxLayout fxFlex>
     <div fxFlex="20">
-        <mat-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl" class="example-tree">
+      <div>
+        <mat-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl" class="file-tree">
             <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
               <li class="mat-tree-node">
                 <button mat-icon-button disabled></button>
@@ -47,12 +46,13 @@
                   </button>
                   <span class="file-node-label" (click)="nestedTreeControl.toggle(node)">{{node.filename}}</span>
                 </div>
-                <ul [class.example-tree-invisible]="!nestedTreeControl.isExpanded(node)">
+                <ul [class.file-tree-invisible]="!nestedTreeControl.isExpanded(node)">
                   <ng-container matTreeNodeOutlet></ng-container>
                 </ul>
               </li>
             </mat-nested-tree-node>
           </mat-tree>
+        </div>
     </div>
     <div fxFlex="80">
       <ngs-code-editor
