@@ -1,9 +1,14 @@
 import { CodeModel } from '@ngstack/code-editor/public_api';
 
+export enum FileNodeType {
+  file = 'file',
+  folder = 'folder'
+}
+
 export class FileNode {
   children?: FileNode[];
-  filename: string;
-  type?: any;
+  name: string;
+  type: FileNodeType;
 
   code?: CodeModel;
 }

@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { FileNode } from './file-node';
+import { FileNode, FileNodeType } from './file-node';
 
 const FILES_DATA: FileNode[] = [
   {
-    filename: 'Files',
+    name: 'Files',
+    type: FileNodeType.folder,
     children: [
       {
-        filename: 'json',
-        type: 'json',
+        name: 'json.json',
+        type: FileNodeType.file,
         code: {
           language: 'json',
           uri: 'main.json',
@@ -22,8 +23,8 @@ const FILES_DATA: FileNode[] = [
         }
       },
       {
-        filename: 'javascript',
-        type: 'js',
+        name: 'javascript.js',
+        type: FileNodeType.file,
         code: {
           language: 'javascript',
           uri: 'main.js',
@@ -42,8 +43,8 @@ const FILES_DATA: FileNode[] = [
         }
       },
       {
-        filename: 'typescript',
-        type: 'ts',
+        name: 'typescript.ts',
+        type: FileNodeType.file,
         code: {
           language: 'typescript',
           uri: 'main.ts',
@@ -69,60 +70,66 @@ const FILES_DATA: FileNode[] = [
     ]
   },
   {
-    filename: 'Applications',
+    name: 'Applications',
+    type: FileNodeType.folder,
     children: [
       {
-        filename: 'Calendar',
-        type: 'app'
+        name: 'Calendar',
+        type: FileNodeType.file
       },
       {
-        filename: 'Chrome',
-        type: 'app'
+        name: 'Chrome',
+        type: FileNodeType.file
       },
       {
-        filename: 'Webstorm',
-        type: 'app'
+        name: 'Webstorm',
+        type: FileNodeType.file
       }
     ]
   },
   {
-    filename: 'Documents',
+    name: 'Documents',
+    type: FileNodeType.folder,
     children: [
       {
-        filename: 'angular',
+        name: 'angular',
+        type: FileNodeType.folder,
         children: [
           {
-            filename: 'src',
+            name: 'src',
+            type: FileNodeType.folder,
             children: [
               {
-                filename: 'compiler',
-                type: 'ts'
+                name: 'compiler.ts',
+                type: FileNodeType.file
               },
               {
-                filename: 'core',
-                type: 'ts'
+                name: 'core.ts',
+                type: FileNodeType.file
               }
             ]
           }
         ]
       },
       {
-        filename: 'material2',
+        name: 'material2',
+        type: FileNodeType.folder,
         children: [
           {
-            filename: 'src',
+            name: 'src',
+            type: FileNodeType.folder,
             children: [
               {
-                filename: 'button',
-                type: 'ts'
+                name: 'button.ts',
+                type: FileNodeType.file
               },
               {
-                filename: 'checkbox',
-                type: 'ts'
+                name: 'checkbox.ts',
+                type: FileNodeType.file
               },
               {
-                filename: 'input',
-                type: 'ts'
+                name: 'input.ts',
+                type: FileNodeType.file
               }
             ]
           }
@@ -131,45 +138,48 @@ const FILES_DATA: FileNode[] = [
     ]
   },
   {
-    filename: 'Downloads',
+    name: 'Downloads',
+    type: FileNodeType.folder,
     children: [
       {
-        filename: 'October',
-        type: 'pdf'
+        name: 'October.pdf',
+        type: FileNodeType.file
       },
       {
-        filename: 'November',
-        type: 'pdf'
+        name: 'November.pdf',
+        type: FileNodeType.file
       },
       {
-        filename: 'Tutorial',
-        type: 'html'
+        name: 'Tutorial.html',
+        type: FileNodeType.file
       }
     ]
   },
   {
-    filename: 'Pictures',
+    name: 'Pictures',
+    type: FileNodeType.folder,
     children: [
       {
-        filename: 'Photo Booth Library',
+        name: 'Photo Booth Library',
+        type: FileNodeType.folder,
         children: [
           {
-            filename: 'Contents',
-            type: 'dir'
+            name: 'Contents',
+            type: FileNodeType.folder
           },
           {
-            filename: 'Pictures',
-            type: 'dir'
+            name: 'Pictures',
+            type: FileNodeType.folder
           }
         ]
       },
       {
-        filename: 'Sun',
-        type: 'png'
+        name: 'Sun.png',
+        type: FileNodeType.file
       },
       {
-        filename: 'Woods',
-        type: 'png'
+        name: 'Woods.png',
+        type: FileNodeType.file
       }
     ]
   }

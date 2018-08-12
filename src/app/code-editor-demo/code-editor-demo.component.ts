@@ -11,7 +11,7 @@ import { CodeEditorService, CodeModel } from '@ngstack/code-editor';
 import { Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { FileDatabase } from './file-database';
-import { FileNode } from './file-node';
+import { FileNode, FileNodeType } from './file-node';
 
 @Component({
   selector: 'app-code-editor-demo',
@@ -55,7 +55,8 @@ export class CodeEditorDemoComponent implements OnInit {
     this.isLoading$ = editorService.loadingTypings.pipe(debounceTime(300));
   }
 
-  hasNestedChild = (_: number, nodeData: FileNode) => !nodeData.type;
+  hasNestedChild = (_: number, nodeData: FileNode) =>
+    nodeData.type === FileNodeType.folder;
 
   private _getChildren = (node: FileNode) => node.children;
 

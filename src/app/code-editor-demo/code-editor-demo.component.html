@@ -19,7 +19,12 @@
           <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
             <li class="mat-tree-node">
               <button mat-icon-button disabled></button>
-              <span class="file-node-label" (click)="selectNode(node)">{{node.filename}}.{{node.type}}</span>
+              <div class="file-node-label"
+                [attr.title]="node.name"
+                (click)="selectNode(node)">
+                <mat-icon *ngIf="node.type === 'file'" class="file-node-label__icon">description</mat-icon>
+                <span class="file-node-label__text">{{node.name}}</span>
+              </div>
             </li>
           </mat-tree-node>
 
@@ -27,12 +32,19 @@
             <li>
               <div class="mat-tree-node">
                 <button mat-icon-button matTreeNodeToggle
-                        [attr.aria-label]="'toggle ' + node.filename">
+                        [attr.aria-label]="'toggle ' + node.name">
                   <mat-icon class="mat-icon-rtl-mirror">
                     {{nestedTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                   </mat-icon>
                 </button>
-                <span class="file-node-label" (click)="nestedTreeControl.toggle(node)">{{node.filename}}</span>
+                <div class="file-node-label"
+                  [attr.title]="node.name"
+                  (click)="nestedTreeControl.toggle(node)">
+                  <mat-icon *ngIf="node.type === 'folder'" class="file-node-label__icon">
+                    {{ nestedTreeControl.isExpanded(node) ? 'folder_open' : 'folder' }}
+                  </mat-icon>
+                  <span class="file-node-label__text">{{node.name}}</span>
+                </div>
               </div>
               <ul [class.file-tree-invisible]="!nestedTreeControl.isExpanded(node)">
                 <ng-container matTreeNodeOutlet></ng-container>

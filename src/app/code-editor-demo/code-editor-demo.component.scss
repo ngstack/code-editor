@@ -42,7 +42,18 @@
   }
 
   .file-node-label {
+    display: flex;
     cursor: pointer;
     user-select: none;
+
+    &__icon {
+      float: left;
+    }
+
+    &__text {
+      float: left;
+      margin-top: 4px;
+      margin-left: 4px;
+    }
   }
 }
