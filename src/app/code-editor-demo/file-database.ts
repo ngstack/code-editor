@@ -28,17 +28,17 @@ const FILES_DATA: FileNode[] = [
           language: 'javascript',
           uri: 'main.js',
           dependencies: ['@types/node'],
-          value: `
-            // JavaScript Example
-            import * as fs from 'fs';
-
-            class Person {
-              greet() {
-                console.log('hello there');
-                fs.mkdir('folder');
-              }
-            }
-          `
+          value: [
+            '// JavaScript Example',
+            `import * as fs from 'fs';`,
+            '',
+            'class Person {',
+            '  greet() {',
+            `    console.log('hello there');`,
+            `    fs.mkdir('folder');`,
+            '  }',
+            '}'
+          ].join('\n')
         }
       },
       {
@@ -47,19 +47,23 @@ const FILES_DATA: FileNode[] = [
         code: {
           language: 'typescript',
           uri: 'main.ts',
-          dependencies: ['@ngstack/translate', '@ngstack/code-editor'],
-          value: `
-            // TypeScript Example
-            import { TranslateModule, TranslateService } from '@ngstack/translate';
-            import { CodeEditorModule } from '@ngstack/code-editor';
-            import * as fs from 'fs';
-
-            export class MyClass {
-              constructor(translate: TranslateService) {
-
-              }
-            }
-          `
+          dependencies: [
+            '@types/node',
+            '@ngstack/translate',
+            '@ngstack/code-editor'
+          ],
+          value: [
+            '// TypeScript Example',
+            `import { TranslateModule, TranslateService } from '@ngstack/translate';`,
+            `import { CodeEditorModule } from '@ngstack/code-editor';`,
+            `import * as fs from 'fs';`,
+            '',
+            'export class MyClass {',
+            '  constructor(translate: TranslateService) {',
+            '    ',
+            '  }',
+            '}'
+          ].join('\n')
         }
       }
     ]
