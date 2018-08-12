@@ -1,3 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
 body { margin: 0; }
+
+html,
+body,
+app-root,
+app-code-editor-demo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+  min-height: 0;
+}

@@ -26,7 +26,7 @@ export class JsonDefaultsService {
       validate: true,
       allowComments: true,
       schemas: [
-        ...defaults._diagnosticsOptions,
+        ...defaults._diagnosticsOptions.schemas,
         {
           uri: 'http://myserver/foo-schema.json',
           // fileMatch: [id],
@@ -58,5 +58,35 @@ export class JsonDefaultsService {
         }
       ]
     });
+  }
+
+  addSchemas(
+    id: string,
+    definitions: Array<{ uri: string; schema: Object }> = []
+  ) {
+    const defaults = this.monaco.languages.json.jsonDefaults;
+    const options = defaults.diagnosticsOptions;
+
+    const schemas: { [key: string]: Object } = {};
+
+    if (options && options.schemas && options.schemas.length > 0) {
+      options.schemas.forEach(schema => {
+        schemas[schema.uri] = schema;
+      });
+    }
+
+    for (const { uri, schema } of definitions) {
+      schemas[uri] = {
+        uri,
+        schema,
+        fileMatch: [id || '*.json']
+      };
+    }
+
+    // console.log(schemas);
+    // console.log(Object.values(schemas));
+
+    options.schemas = Object.values(schemas);
+    defaults.setDiagnosticsOptions(options);
   }
 }

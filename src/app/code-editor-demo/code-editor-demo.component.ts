@@ -1,76 +1,43 @@
+import { NestedTreeControl } from '@angular/cdk/tree';
 import {
   Component,
-  Input,
-  ViewChild,
   ElementRef,
+  OnInit,
+  ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import { MatSelectChange } from '@angular/material/select';
+import { MatTreeNestedDataSource } from '@angular/material/tree';
+import { CodeEditorService, CodeModel } from '@ngstack/code-editor';
+import { Observable } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+import { FileDatabase } from './file-database';
+import { FileNode, FileNodeType } from './file-node';
 
 @Component({
   selector: 'app-code-editor-demo',
   templateUrl: './code-editor-demo.component.html',
-  styleUrls: ['./code-editor-demo.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./code-editor-demo.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  providers: [FileDatabase]
 })
-export class CodeEditorDemoComponent {
+export class CodeEditorDemoComponent implements OnInit {
+  nestedTreeControl: NestedTreeControl<FileNode>;
+  nestedDataSource: MatTreeNestedDataSource<FileNode>;
+
   themes = [
     { name: 'Visual Studio', value: 'vs' },
     { name: 'Visual Studio Dark', value: 'vs-dark' },
     { name: 'High Contrast Dark', value: 'hc-black' }
   ];
 
-  demos = [
-    {
-      id: 'typescript',
-      language: 'typescript',
-      code: `
-        // TypeScript Example
-        import { TranslateModule, TranslateService } from '@ngstack/translate';
-        import { CodeEditorModule } from '@ngstack/code-editor';
-        import * as fs from 'fs';
+  selectedModel: CodeModel = null;
+  activeTheme = 'vs';
+  readOnly = false;
+  isLoading = false;
+  isLoading$: Observable<boolean>;
 
-        export class MyClass {
-          constructor(translate: TranslateService) {
-
-          }
-        }
-      `
-    },
-    {
-      id: 'javascript',
-      language: 'javascript',
-      code: `
-        // JavaScript Example
-        import * as fs from 'fs';
-
-        class Person {
-          greet() {
-            console.log('hello there');
-            fs.mkdir('folder');
-          }
-        }
-      `
-    },
-    {
-      id: 'json',
-      language: 'json',
-      code: [
-        '{',
-        '    "$schema": "http://myserver/foo-schema.json",',
-        '    "p1": "v3",',
-        '    "p2": false',
-        '}'
-      ].join('\n')
-    }
-  ];
-
-  selectedDemo = this.demos[2];
-
-  @Input() activeTheme = 'vs';
-  @Input() code = this.demos[2].code;
-  @Input() readOnly = false;
-  @ViewChild('file') fileInput: ElementRef;
+  @ViewChild('file')
+  fileInput: ElementRef;
 
   options = {
     contextmenu: true,
@@ -79,34 +46,38 @@ export class CodeEditorDemoComponent {
     }
   };
 
-  dependencies: string[] = [
-    '@types/node',
-    '@ngstack/translate',
-    '@ngstack/code-editor'
-  ];
+  constructor(database: FileDatabase, editorService: CodeEditorService) {
+    this.nestedTreeControl = new NestedTreeControl<FileNode>(this._getChildren);
+    this.nestedDataSource = new MatTreeNestedDataSource();
+
+    database.dataChange.subscribe(data => (this.nestedDataSource.data = data));
+
+    this.isLoading$ = editorService.loadingTypings.pipe(debounceTime(300));
+  }
+
+  hasNestedChild = (_: number, nodeData: FileNode) =>
+    nodeData.type === FileNodeType.folder;
+
+  private _getChildren = (node: FileNode) => node.children;
 
   onCodeChanged(value) {
-    // console.log('CODE', this.code);
+    // console.log('CODE', value);
   }
 
-  onLoadClicked() {
-    this.fileInput.nativeElement.click();
+  isNodeSelected(node: FileNode): boolean {
+    return (
+      node &&
+      node.code &&
+      this.selectedModel &&
+      node.code === this.selectedModel
+    );
   }
 
-  onFileSelected(event) {
-    const files: FileList = event.target.files;
-    if (files && files.length > 0) {
-      const file = files.item(0);
-      const reader = new FileReader();
-
-      reader.onloadend = () => {
-        this.code = reader.result;
-      };
-      reader.readAsText(file);
-    }
+  selectNode(node: FileNode) {
+    this.isLoading = false;
+    console.log(node);
+    this.selectedModel = node.code;
   }
 
-  onDemoChanged(event: MatSelectChange) {
-    this.code = event.value.code;
-  }
+  ngOnInit() {}
 }

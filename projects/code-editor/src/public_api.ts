@@ -5,6 +5,9 @@
 export * from './lib/services/code-editor.service';
 export * from './lib/services/typescript-defaults.service';
 export * from './lib/services/javascript-defaults.service';
+
+export * from './lib/models/code.model';
+
 export * from './lib/code-editor/code-editor.component';
 
 export * from './lib/code-editor.module';

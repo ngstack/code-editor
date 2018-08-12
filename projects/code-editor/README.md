@@ -36,9 +36,8 @@ Update template to use the `ngs-code-editor`:
 
 ```html
 <ngs-code-editor
-  theme="vs-dark"
-  language="javascript"
-  [(value)]="code"
+  [theme]="theme"
+  [codeModel]="model"
   [options]="options"
   (valueChanged)="onCodeChanged($event)">
 </ngs-code-editor>
@@ -48,7 +47,13 @@ Update component controller class and provide corresponding properties and event
 
 ```ts
 export class AppComponent {
-  @Input() code = 'var x = 1;';
+  theme = 'vs-dark';
+
+  codeModel: CodeModel = {
+    language: 'json',
+    uri: 'main.json',
+    value: '{}'
+  };
 
   options = {
     contextmenu: true,
@@ -58,21 +63,35 @@ export class AppComponent {
   };
 
   onCodeChanged(value) {
-    console.log('CODE', this.code);
+    console.log('CODE', value);
   }
 }
 ```
 
 ## Input Properties
 
-| Name         | Type     | Default Value | Description                                                  |
-| ------------ | -------- | ------------- | ------------------------------------------------------------ |
-| theme        | string   | vs            | Editor theme. Allowed values: `vs`, `vs-dark` or `hc-black`. |
-| language     | string   | typescript    | Editor language.                                             |
-| options      | Object   | {...}         | Editor options.                                              |
-| readOnly     | boolean  | false         | Toggles readonly state of the editor.                        |
-| value        | string   |               | Editor text value.                                           |
-| dependencies | string[] |               | Dependencies to use.                                         |
+| Name      | Type      | Default Value | Description                                                    |
+| --------- | --------- | ------------- | -------------------------------------------------------------- |
+| theme     | string    | vs            | Editor theme. Supported values: `vs`, `vs-dark` or `hc-black`. |
+| options   | Object    | {...}         | Editor options.                                                |
+| readOnly  | boolean   | false         | Toggles readonly state of the editor.                          |
+| codeModel | CodeModel |               | Source code model.                                             |
+
+The `codeModel` property holds the value that implements the `CodeModel` interface:
+
+```ts
+export interface CodeModel {
+  language: string;
+  value: string;
+  uri: string;
+
+  dependencies?: Array<string>;
+  schemas?: Array<{
+    uri: string;
+    schema: Object;
+  }>;
+}
+```
 
 ### Editor Options
 
@@ -103,7 +122,7 @@ The editor is able to resolve typing libraries when set to the `Typescript` or `
 Use `dependencies` property to provide a list of libraries to resolve
 
 ```html
-<ngs-code-editor [dependencies]="dependencies" ...>
+<ngs-code-editor [codeModel]="model" ...>
 </ngs-code-editor>
 ```
 
@@ -111,11 +130,12 @@ And in the controller class:
 
 ```ts
 export class MyEditorComponent {
-  dependencies: string[] = [
-    '@types/node',
-    '@ngstack/translate',
-    '@ngstack/code-editor'
-  ];
+  codeModel: CodeModel = {
+    language: 'typescript',
+    uri: 'main.ts',
+    value: '',
+    dependencies: ['@types/node', '@ngstack/translate', '@ngstack/code-editor']
+  };
 }
 ```
 
@@ -135,6 +155,42 @@ export class MyClass {
 ```
 
 You should have all the types resolved and auto-completion working.
+
+## JSON schemas
+
+You can associate multiple schemas when working with JSON files.
+
+```html
+<ngs-code-editor [codeModel]="model" ...>
+</ngs-code-editor>
+```
+
+Provide the required schemas like in the example below.
+
+```ts
+export class MyEditorComponent {
+  codeModel: CodeModel = {
+    language: 'json',
+    uri: 'main.json',
+    value: '{ "test": true }',
+    schemas: [
+      {
+        uri: 'http://custom/schema.json',
+        schema: {
+          type: 'object',
+          properties: {
+            type: {
+              enum: ['button', 'textbox']
+            }
+          }
+        }
+      }
+    ]
+  };
+}
+```
+
+The schemas get automatically installed and associated with the corresponding file.
 
 ## Offline Setup
 

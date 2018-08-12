@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Injectable, NgZone } from '@angular/core';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 declare const monaco: any;
 
@@ -21,10 +21,13 @@ export class CodeEditorService {
   baseUrl = 'https://unpkg.com/monaco-editor/min';
 
   // typingsWorkerUrl = 'assets/workers/typings-worker.js';
-  typingsWorkerUrl = 'https://unpkg.com/@ngstack/code-editor/workers/typings-worker.js';
+  typingsWorkerUrl =
+    'https://unpkg.com/@ngstack/code-editor/workers/typings-worker.js';
 
   typingsLoaded = new Subject<TypingsInfo>();
   loaded = new Subject<{ monaco: any }>();
+
+  loadingTypings = new BehaviorSubject<boolean>(false);
 
   private typingsWorker: Worker;
 
@@ -40,6 +43,7 @@ export class CodeEditorService {
         this.typingsWorker = new Worker(this.typingsWorkerUrl);
       }
       this.typingsWorker.addEventListener('message', e => {
+        this.loadingTypings.next(false);
         this.typingsLoaded.next(e.data);
       });
     }
@@ -50,6 +54,7 @@ export class CodeEditorService {
     if (dependencies && dependencies.length > 0) {
       const worker = this.loadTypingsWorker();
       if (worker) {
+        this.loadingTypings.next(true);
         worker.postMessage({
           dependencies
         });

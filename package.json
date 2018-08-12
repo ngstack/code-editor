@@ -12,15 +12,17 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "spellcheck": "cspell 'src/**/*.ts' 'e2e/**/*.ts' 'projects/**/*.ts'",
-    "build:code-editor": "ng build code-editor && cp -R projects/code-editor/src/lib/workers dist/@ngstack/code-editor",
-    "prod:code-editor": "ng build code-editor --prod && cp -R projects/code-editor/src/lib/workers dist/@ngstack/code-editor"
+    "build:lib": "ng build code-editor && cp -R projects/code-editor/src/lib/workers dist/@ngstack/code-editor",
+    "build:prod": "ng build code-editor --prod && cp -R projects/code-editor/src/lib/workers dist/@ngstack/code-editor"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^6.1.2",
+    "@angular/cdk": "^6.4.3",
     "@angular/common": "^6.1.2",
     "@angular/compiler": "^6.1.2",
     "@angular/core": "^6.1.2",
+    "@angular/flex-layout": "^6.0.0-beta.17",
     "@angular/forms": "^6.1.2",
     "@angular/http": "^6.1.2",
     "@angular/material": "^6.4.3",
@@ -30,13 +32,12 @@
     "core-js": "^2.5.4",
     "monaco-editor": "^0.13.1",
     "rxjs": "^6.2.2",
-    "zone.js": "^0.8.26",
-    "@angular/cdk": "^6.4.3"
+    "zone.js": "^0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.7.2",
     "@angular-devkit/build-ng-packagr": "~0.7.2",
-    "@angular/cli": "^6.1.2",
+    "@angular/cli": "^6.1.3",
     "@angular/compiler-cli": "^6.1.2",
     "@angular/language-service": "^6.1.2",
     "@types/electron": "^1.6.10",
@@ -44,7 +45,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.4.3",
-    "cspell": "^3.0.2",
+    "cspell": "^3.1.3",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "^2.0.5",
