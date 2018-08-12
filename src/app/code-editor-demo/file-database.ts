@@ -19,7 +19,20 @@ const FILES_DATA: FileNode[] = [
             '    "p1": "v3",',
             '    "p2": false',
             '}'
-          ].join('\n')
+          ].join('\n'),
+          schemas: [
+            {
+              uri: 'http://custom/schema.json',
+              schema: {
+                type: 'object',
+                properties: {
+                  type: {
+                    enum: ['button', 'textbox']
+                  }
+                }
+              }
+            }
+          ]
         }
       },
       {

@@ -4,5 +4,8 @@ export interface CodeModel {
   uri: string;
 
   dependencies?: Array<string>;
-  schemas?: Array<string>;
+  schemas?: Array<{
+    uri: string;
+    schema: Object;
+  }>;
 }

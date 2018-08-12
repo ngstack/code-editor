@@ -21,6 +21,7 @@
               <button mat-icon-button disabled></button>
               <div class="file-node-label"
                 [attr.title]="node.name"
+                [style.color]="isNodeSelected(node) ? 'blueviolet' : 'black'"
                 (click)="selectNode(node)">
                 <mat-icon *ngIf="node.type === 'file'" class="file-node-label__icon">description</mat-icon>
                 <span class="file-node-label__text">{{node.name}}</span>

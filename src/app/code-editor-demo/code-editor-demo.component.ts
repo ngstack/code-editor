@@ -64,6 +64,15 @@ export class CodeEditorDemoComponent implements OnInit {
     // console.log('CODE', value);
   }
 
+  isNodeSelected(node: FileNode): boolean {
+    return (
+      node &&
+      node.code &&
+      this.selectedModel &&
+      node.code === this.selectedModel
+    );
+  }
+
   selectNode(node: FileNode) {
     this.isLoading = false;
     console.log(node);

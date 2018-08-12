@@ -169,10 +169,56 @@ export class CodeEditorComponent
       this.valueChanged.emit(newValue);
     });
 
-    if (language && this.codeModel.dependencies) {
+    // if (language) {
+    //   const lang = language.toLowerCase();
+
+    //   switch (lang) {
+    //     case 'typescript':
+    //       if (this.codeModel.dependencies) {
+    //         this.editorService.loadTypings(this.codeModel.dependencies);
+    //       }
+    //       break;
+    //     case 'javascript':
+    //       if (this.codeModel.dependencies) {
+    //         this.editorService.loadTypings(this.codeModel.dependencies);
+    //       }
+    //       break;
+    //     case 'json':
+    //       if (this.codeModel.schemas) {
+    //         this.jsonDefaults.addSchemas(this.codeModel.schemas);
+    //       }
+    //       break;
+    //     default:
+    //       break;
+    //   }
+    // }
+    this.setupDependencies(this.codeModel);
+  }
+
+  private setupDependencies(model: CodeModel) {
+    const { language } = model;
+
+    if (language) {
       const lang = language.toLowerCase();
-      if (lang === 'typescript' || lang === 'javascript') {
-        this.editorService.loadTypings(this.codeModel.dependencies);
+
+      switch (lang) {
+        case 'typescript':
+          if (model.dependencies) {
+            this.editorService.loadTypings(model.dependencies);
+          }
+          break;
+        case 'javascript':
+          if (model.dependencies) {
+            this.editorService.loadTypings(model.dependencies);
+          }
+          break;
+        case 'json':
+          if (model.schemas) {
+            this.jsonDefaults.addSchemas(model.schemas);
+          }
+          break;
+        default:
+          break;
       }
     }
   }
@@ -190,11 +236,13 @@ export class CodeEditorComponent
     this.setEditorValue(model.value);
     monaco.editor.setModelLanguage(this._model, model.language);
 
-    if (model.language && model.dependencies) {
-      const lang = model.language.toLowerCase();
-      if (lang === 'typescript' || lang === 'javascript') {
-        this.editorService.loadTypings(model.dependencies);
-      }
-    }
+    // if (model.language && model.dependencies) {
+    //   const lang = model.language.toLowerCase();
+    //   if (lang === 'typescript' || lang === 'javascript') {
+    //     this.editorService.loadTypings(model.dependencies);
+    //   }
+    // }
+
+    this.setupDependencies(this.codeModel);
   }
 }
