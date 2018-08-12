@@ -60,7 +60,10 @@ export class JsonDefaultsService {
     });
   }
 
-  addSchemas(definitions: Array<{ uri: string; schema: Object }> = []) {
+  addSchemas(
+    id: string,
+    definitions: Array<{ uri: string; schema: Object }> = []
+  ) {
     const defaults = this.monaco.languages.json.jsonDefaults;
     const options = defaults.diagnosticsOptions;
 
@@ -75,7 +78,8 @@ export class JsonDefaultsService {
     for (const { uri, schema } of definitions) {
       schemas[uri] = {
         uri,
-        schema
+        schema,
+        fileMatch: [id || '*.json']
       };
     }
 
