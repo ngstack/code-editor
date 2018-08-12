@@ -1,26 +1,33 @@
 {
-  "version": "0.1",
-  "language": "en",
-  "words": [
-    "ngstack",
-    "classlist",
-    "Denys",
-
-    "Truthy",
-    "Injectable",
-    "uncomment",
-    "unshare",
-    "validators",
-    "guid",
-    "polyfill",
-    "polyfills",
-    "jsonp",
-    "hammerjs",
-    "pdfjs",
-    "xpath",
-    "tooltip",
-    "tooltips",
-    "unindent"
-  ],
-  "dictionaries": ["en-gb", "html"]
+    "version": "0.1",
+    "language": "en",
+    "words": [
+        "classlist",
+        "Denys",
+        "guid",
+        "hammerjs",
+        "Helvetica",
+        "Injectable",
+        "jsonp",
+        "Neue",
+        "ngstack",
+        "pdfjs",
+        "polyfill",
+        "polyfills",
+        "Segoe",
+        "tooltip",
+        "tooltips",
+        "Truthy",
+        "uncomment",
+        "unindent",
+        "unshare",
+        "validators",
+        "Webstorm",
+        "xpath"
+    ],
+    "flagWords": [],
+    "dictionaries": [
+        "en-gb",
+        "html"
+    ]
 }
