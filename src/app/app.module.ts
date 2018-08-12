@@ -4,7 +4,7 @@ import { RouterModule, Route } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CodeEditorModule } from '@ngstack/code-editor';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
+// import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -28,7 +28,7 @@ const routes: Route[] = [
     RouterModule.forRoot(routes, { initialNavigation: 'enabled' }),
     FlexLayoutModule,
     MatButtonModule,
-    MatSelectModule,
+    // MatSelectModule,
     MatToolbarModule,
     MatIconModule,
     MatMenuModule,

@@ -4,6 +4,67 @@ import { FileNode } from './file-node';
 
 const FILES_DATA: FileNode[] = [
   {
+    filename: 'Files',
+    children: [
+      {
+        filename: 'json',
+        type: 'json',
+        code: {
+          language: 'json',
+          uri: 'main.json',
+          value: [
+            '{',
+            '    "$schema": "http://myserver/foo-schema.json",',
+            '    "p1": "v3",',
+            '    "p2": false',
+            '}'
+          ].join('\n')
+        }
+      },
+      {
+        filename: 'javascript',
+        type: 'js',
+        code: {
+          language: 'javascript',
+          uri: 'main.js',
+          dependencies: ['@types/node'],
+          value: `
+            // JavaScript Example
+            import * as fs from 'fs';
+
+            class Person {
+              greet() {
+                console.log('hello there');
+                fs.mkdir('folder');
+              }
+            }
+          `
+        }
+      },
+      {
+        filename: 'typescript',
+        type: 'ts',
+        code: {
+          language: 'typescript',
+          uri: 'main.ts',
+          dependencies: ['@ngstack/translate', '@ngstack/code-editor'],
+          value: `
+            // TypeScript Example
+            import { TranslateModule, TranslateService } from '@ngstack/translate';
+            import { CodeEditorModule } from '@ngstack/code-editor';
+            import * as fs from 'fs';
+
+            export class MyClass {
+              constructor(translate: TranslateService) {
+
+              }
+            }
+          `
+        }
+      }
+    ]
+  },
+  {
     filename: 'Applications',
     children: [
       {
