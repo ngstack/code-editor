@@ -12,8 +12,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "spellcheck": "cspell 'src/**/*.ts' 'e2e/**/*.ts' 'projects/**/*.ts'",
-    "build:code-editor": "ng build code-editor && cp -R projects/code-editor/src/lib/workers dist/@ngstack/code-editor",
-    "prod:code-editor": "ng build code-editor --prod && cp -R projects/code-editor/src/lib/workers dist/@ngstack/code-editor"
+    "build:lib": "ng build code-editor && cp -R projects/code-editor/src/lib/workers dist/@ngstack/code-editor",
+    "build:prod": "ng build code-editor --prod && cp -R projects/code-editor/src/lib/workers dist/@ngstack/code-editor"
   },
   "private": true,
   "dependencies": {

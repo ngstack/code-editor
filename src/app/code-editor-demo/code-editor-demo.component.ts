@@ -1,15 +1,17 @@
+import { NestedTreeControl } from '@angular/cdk/tree';
 import {
   Component,
-  ViewChild,
   ElementRef,
-  ViewEncapsulation,
-  OnInit
+  OnInit,
+  ViewChild,
+  ViewEncapsulation
 } from '@angular/core';
-import { CodeModel } from '@ngstack/code-editor';
-import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
-import { FileNode } from './file-node';
+import { CodeEditorService, CodeModel } from '@ngstack/code-editor';
+import { Observable } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { FileDatabase } from './file-database';
+import { FileNode } from './file-node';
 
 @Component({
   selector: 'app-code-editor-demo',
@@ -31,6 +33,8 @@ export class CodeEditorDemoComponent implements OnInit {
   selectedModel: CodeModel = null;
   activeTheme = 'vs';
   readOnly = false;
+  isLoading = false;
+  isLoading$: Observable<boolean>;
 
   @ViewChild('file')
   fileInput: ElementRef;
@@ -42,11 +46,13 @@ export class CodeEditorDemoComponent implements OnInit {
     }
   };
 
-  constructor(database: FileDatabase) {
+  constructor(database: FileDatabase, editorService: CodeEditorService) {
     this.nestedTreeControl = new NestedTreeControl<FileNode>(this._getChildren);
     this.nestedDataSource = new MatTreeNestedDataSource();
 
     database.dataChange.subscribe(data => (this.nestedDataSource.data = data));
+
+    this.isLoading$ = editorService.loadingTypings.pipe(debounceTime(300));
   }
 
   hasNestedChild = (_: number, nodeData: FileNode) => !nodeData.type;
@@ -58,6 +64,7 @@ export class CodeEditorDemoComponent implements OnInit {
   }
 
   selectNode(node: FileNode) {
+    this.isLoading = false;
     console.log(node);
     this.selectedModel = node.code;
   }

@@ -43,12 +43,20 @@
       </div>
     </div>
     <div fxFlex="80">
-      <ngs-code-editor *ngIf="selectedModel"
-        [codeModel]="selectedModel"
-        [theme]="activeTheme"
-        [options]="options"
-        (valueChanged)="onCodeChanged($event)">
-      </ngs-code-editor>
+      <ng-container *ngIf="selectedModel">
+        <mat-progress-bar
+          *ngIf="isLoading$ | async"
+          color="accent"
+          mode="indeterminate">
+        </mat-progress-bar>
+        <ngs-code-editor
+          [codeModel]="selectedModel"
+          [theme]="activeTheme"
+          [options]="options"
+          (valueChanged)="onCodeChanged($event)">
+        </ngs-code-editor>
+      </ng-container>
+
     </div>
   </div>
 </div>

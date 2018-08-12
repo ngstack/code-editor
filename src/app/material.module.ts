@@ -5,23 +5,22 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTreeModule } from '@angular/material/tree';
+import { MatProgressBarModule } from '@angular/material';
+
+export function modules() {
+  return [
+    MatButtonModule,
+    // MatSelectModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatMenuModule,
+    MatTreeModule,
+    MatProgressBarModule
+  ];
+}
 
 @NgModule({
-  imports: [
-    MatButtonModule,
-    // MatSelectModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatMenuModule,
-    MatTreeModule
-  ],
-  exports: [
-    MatButtonModule,
-    // MatSelectModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatMenuModule,
-    MatTreeModule
-  ]
+  imports: modules(),
+  exports: modules()
 })
 export class MaterialModule {}
