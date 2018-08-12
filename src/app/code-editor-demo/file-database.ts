@@ -66,6 +66,31 @@ const FILES_DATA: FileNode[] = [
             '}'
           ].join('\n')
         }
+      },
+      {
+        name: 'component.style.css',
+        type: FileNodeType.file,
+        code: {
+          language: 'css',
+          uri: 'component.style.css',
+          value: [
+            'html {',
+            '  background-color: #e2e2e2;',
+            '  margin: 0;',
+            '  padding: 0;',
+            '}',
+            '',
+            'body {',
+            '  background-color: #fff;',
+            '  border-top: solid 10px #000;',
+            '  color: #333;',
+            '  font-size: .85em;',
+            '  font-family: "Segoe UI","HelveticaNeue-Light", sans-serif;',
+            '  margin: 0;',
+            '  padding: 0;',
+            '}'
+          ].join('\n')
+        }
       }
     ]
   },
