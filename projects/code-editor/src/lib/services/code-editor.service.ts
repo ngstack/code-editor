@@ -1,7 +1,12 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, InjectionToken, Optional, Inject } from '@angular/core';
 import { Subject, BehaviorSubject } from 'rxjs';
+import { CodeEditorSettings } from '../editor-settings';
 
 declare const monaco: any;
+
+export const EDITOR_SETTINGS = new InjectionToken<CodeEditorSettings>(
+  'EDITOR_SETTINGS'
+);
 
 export interface TypingsInfo {
   entryPoints: { [key: string]: string };
@@ -30,6 +35,21 @@ export class CodeEditorService {
   loadingTypings = new BehaviorSubject<boolean>(false);
 
   private typingsWorker: Worker;
+
+  constructor(
+    @Optional()
+    @Inject(EDITOR_SETTINGS)
+    settings: CodeEditorSettings
+  ) {
+    const defaults = {
+      baseUrl: this.baseUrl,
+      typingsWorkerUrl: this.typingsWorkerUrl,
+      ...settings
+    };
+
+    this.baseUrl = defaults.baseUrl;
+    this.typingsWorkerUrl = defaults.typingsWorkerUrl;
+  }
 
   private loadTypingsWorker(): Worker {
     if (!this.typingsWorker && (<any>window).Worker) {
