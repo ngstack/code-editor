@@ -11,7 +11,8 @@ import {
   Output,
   EventEmitter,
   SimpleChanges,
-  OnInit
+  OnInit,
+  HostListener
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CodeEditorService } from '../services/code-editor.service';
@@ -138,6 +139,13 @@ export class CodeEditorComponent
 
     if (changes.theme && !changes.theme.firstChange) {
       monaco.editor.setTheme(changes.theme.currentValue);
+    }
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    if (this._editor) {
+      this._editor.layout();
     }
   }
 
