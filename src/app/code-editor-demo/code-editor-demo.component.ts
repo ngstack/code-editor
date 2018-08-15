@@ -79,5 +79,17 @@ export class CodeEditorDemoComponent implements OnInit {
     this.selectedModel = node.code;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    /*
+    this.selectedModel = {
+      language: 'json',
+      uri: 'main.json',
+      value: '{}'
+    };
+    */
+  }
+
+  onEditorLoaded() {
+    console.log('loaded');
+  }
 }

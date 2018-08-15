@@ -113,9 +113,10 @@ The following options are used by default when Editor Component gets created:
 
 ## Output Events
 
-| Name         | Argument Type | Description                             |
-| ------------ | ------------- | --------------------------------------- |
-| valueChanged | string        | Raised after editor value gets changed. |
+| Name         | Argument Type | Description                                             |
+| ------------ | ------------- | ------------------------------------------------------- |
+| loaded       |               | Raised when editor finished loading all its components. |
+| valueChanged | string        | Raised after editor value gets changed.                 |
 
 ## Typings
 
@@ -269,3 +270,44 @@ use `CodeEditorModule.forRoot()` in the main application,
 and `CodeEditorModule.forChild()` in all lazy-loaded feature modules.
 
 For more details please refer to [Lazy Loading Feature Modules](https://angular.io/guide/lazy-loading-ngmodules)
+
+## Enabling error details
+
+Append the following code to the `polyfills.ts` to enable error details in the tooltips:
+
+```ts
+// workaround for https://github.com/Microsoft/monaco-editor/issues/790
+
+Promise.all = function(values: any): Promise<any> {
+  let resolve: (v: any) => void;
+  let reject: (v: any) => void;
+  const promise = new this((res, rej) => {
+    resolve = res;
+    reject = rej;
+  });
+  let count = 0;
+  let index = 0;
+  const resolvedValues: any[] = [];
+  for (let value of values) {
+    if (!(value && value.then)) {
+      value = this.resolve(value);
+    }
+    value.then(
+      (idx => (val: any) => {
+        resolvedValues[idx] = val;
+        count--;
+        if (!count) {
+          resolve(resolvedValues);
+        }
+      })(index),
+      reject
+    );
+    count++;
+    index++;
+  }
+  if (!count) {
+    resolve(resolvedValues);
+  }
+  return promise;
+};
+```

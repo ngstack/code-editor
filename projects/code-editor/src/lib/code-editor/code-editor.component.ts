@@ -96,6 +96,9 @@ export class CodeEditorComponent
   @Output()
   valueChanged = new EventEmitter<string>();
 
+  @Output()
+  loaded = new EventEmitter();
+
   constructor(
     private editorService: CodeEditorService,
     private typescriptDefaults: TypescriptDefaultsService,
@@ -141,6 +144,7 @@ export class CodeEditorComponent
   async ngAfterViewInit() {
     await this.editorService.loadEditor();
     this.setupEditor();
+    this.loaded.emit();
   }
 
   private setupEditor() {
@@ -211,7 +215,9 @@ export class CodeEditorComponent
 
   private updateModel(model: CodeModel) {
     this.setEditorValue(model.value);
-    monaco.editor.setModelLanguage(this._model, model.language);
+    if (this._model && typeof monaco !== undefined) {
+      monaco.editor.setModelLanguage(this._model, model.language);
+    }
     this.setupDependencies(this.codeModel);
   }
 }
