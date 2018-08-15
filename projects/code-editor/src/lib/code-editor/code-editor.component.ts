@@ -149,12 +149,17 @@ export class CodeEditorComponent
 
   private setupEditor() {
     const domElement: HTMLDivElement = this.editorContent.nativeElement;
-    const { value, language, uri } = this.codeModel;
+    const settings = {
+      value: '',
+      language: 'text',
+      uri: 'code',
+      ...this.codeModel
+    };
 
     this._model = monaco.editor.createModel(
-      value,
-      language,
-      monaco.Uri.file(uri || 'code')
+      settings.value,
+      settings.language,
+      monaco.Uri.file(settings.uri)
     );
 
     const options = Object.assign({}, this.defaultOptions, this.options, {
@@ -177,6 +182,10 @@ export class CodeEditorComponent
   }
 
   private setupDependencies(model: CodeModel) {
+    if (!model) {
+      return;
+    }
+
     const { language } = model;
 
     if (language) {
@@ -214,10 +223,12 @@ export class CodeEditorComponent
   }
 
   private updateModel(model: CodeModel) {
-    this.setEditorValue(model.value);
-    if (this._model && typeof monaco !== undefined) {
-      monaco.editor.setModelLanguage(this._model, model.language);
+    if (model) {
+      this.setEditorValue(model.value);
+      if (this._model && typeof monaco !== undefined) {
+        monaco.editor.setModelLanguage(this._model, model.language);
+      }
+      this.setupDependencies(model);
     }
-    this.setupDependencies(this.codeModel);
   }
 }
