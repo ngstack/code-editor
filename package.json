@@ -31,7 +31,7 @@
     "@angular/router": "^6.1.2",
     "core-js": "^2.5.4",
     "monaco-editor": "^0.14.2",
-    "rxjs": "^6.2.2",
+    "rxjs": "^6.5.2",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
