@@ -16,13 +16,17 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    npm install -g @angular/cli
     npm install
-    ng build --prod
-  displayName: 'npm install and build'
+  displayName: 'Install dependencies'
 
 - task: Npm@1
   displayName: Unit tests
   inputs:
     command: 'custom'
     customCommand: 'run test:ci'
+
+- task: Npm@1
+  displayName: Production Build
+  inputs:
+    command: 'custom'
+    customCommand: 'run build:prod'

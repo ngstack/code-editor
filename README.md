@@ -1,6 +1,6 @@
 # @ngstack/code-editor
 
-[![CircleCI](https://circleci.com/gh/ngstack/code-editor.svg?style=svg)](https://circleci.com/gh/ngstack/code-editor)
+[![Build Status](https://dev.azure.com/ngstack/code-editor/_apis/build/status/ngstack.code-editor?branchName=master)](https://dev.azure.com/ngstack/code-editor/_build/latest?definitionId=2&branchName=master)
 
 Code editor component for Angular applications.
 
@@ -41,7 +41,8 @@ Update template to use the `ngs-code-editor`:
   [theme]="theme"
   [codeModel]="model"
   [options]="options"
-  (valueChanged)="onCodeChanged($event)">
+  (valueChanged)="onCodeChanged($event)"
+>
 </ngs-code-editor>
 ```
 
@@ -125,8 +126,7 @@ The editor is able to resolve typing libraries when set to the `Typescript` or `
 Use `dependencies` property to provide a list of libraries to resolve
 
 ```html
-<ngs-code-editor [codeModel]="model" ...>
-</ngs-code-editor>
+<ngs-code-editor [codeModel]="model" ...> </ngs-code-editor>
 ```
 
 And in the controller class:
@@ -164,8 +164,7 @@ You should have all the types resolved and auto-completion working.
 You can associate multiple schemas when working with JSON files.
 
 ```html
-<ngs-code-editor [codeModel]="model" ...>
-</ngs-code-editor>
+<ngs-code-editor [codeModel]="model" ...> </ngs-code-editor>
 ```
 
 Provide the required schemas like in the example below.
