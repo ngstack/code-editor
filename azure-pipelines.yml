@@ -20,3 +20,9 @@ steps:
     npm install
     ng build --prod
   displayName: 'npm install and build'
+
+- task: Npm@1
+  displayName: Unit tests
+  inputs:
+    command: 'custom'
+    customCommand: 'run test:ci'
