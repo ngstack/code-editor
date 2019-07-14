@@ -13,7 +13,8 @@
     "e2e": "ng e2e",
     "spellcheck": "cspell 'src/**/*.ts' 'e2e/**/*.ts' 'projects/**/*.ts'",
     "build:lib": "ng build code-editor && cp -R projects/code-editor/src/lib/workers dist/@ngstack/code-editor",
-    "build:prod": "ng build code-editor --prod && cp -R projects/code-editor/src/lib/workers dist/@ngstack/code-editor"
+    "build:prod": "ng build code-editor --prod && cp -R projects/code-editor/src/lib/workers dist/@ngstack/code-editor",
+    "test:ci": "ng test code-editor --watch=false --browsers=ChromeHeadless"
   },
   "private": true,
   "dependencies": {
