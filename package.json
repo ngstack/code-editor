@@ -30,10 +30,9 @@
     "@angular/platform-browser": "^8.2.2",
     "@angular/platform-browser-dynamic": "^8.2.2",
     "@angular/router": "^8.2.2",
-    "core-js": "^2.5.4",
-    "monaco-editor": "^0.14.2",
-    "rxjs": "^6.2.2",
-    "zone.js": "^0.9.1"
+    "monaco-editor": "^0.17.1",
+    "rxjs": "^6.5.2",
+    "zone.js": "^0.10.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.802.1",
