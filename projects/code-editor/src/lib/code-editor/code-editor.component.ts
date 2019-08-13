@@ -48,7 +48,7 @@ export class CodeEditorComponent
 
   private subscriptions: Subscription[] = [];
 
-  @ViewChild('editor')
+  @ViewChild('editor', { static: true })
   editorContent: ElementRef;
 
   @Input()
