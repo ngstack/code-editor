@@ -32,7 +32,7 @@
     "@angular/router": "^8.2.2",
     "monaco-editor": "^0.17.1",
     "rxjs": "^6.5.2",
-    "zone.js": "^0.10.1"
+    "zone.js": "^0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.802.2",
