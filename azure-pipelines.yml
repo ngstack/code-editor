@@ -32,6 +32,6 @@ steps:
     customCommand: 'run build:prod'
 
 - task: PublishPipelineArtifact@0
-    inputs:
-      artifactName: 'dist'
-      targetPath: './dist/@ngstack/code-editor'
+  inputs:
+    artifactName: 'dist'
+    targetPath: './dist/@ngstack/code-editor'
