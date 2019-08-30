@@ -2,14 +2,6 @@
 # yarn lockfile v1
 
 
-"@angular-devkit/architect@0.803.1":
-  version "0.803.1"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.803.1.tgz#986e755d4e913abf6eb200deb247a4ad33f65ee0"
-  integrity sha512-VAakyyQ7SsJXMGeg3pOFREgp7W4JMl5z3Qhbjvzo34mb9OvmgSEVMB0aEN0ZMmA2VvJrIy1IWkJt4aARVIRquw==
-  dependencies:
-    "@angular-devkit/core" "8.3.1"
-    rxjs "6.4.0"
-
 "@angular-devkit/architect@0.803.2":
   version "0.803.2"
   resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.803.2.tgz#493813fed3c493d77e974c9e2dadf18e153c5cd8"
@@ -80,12 +72,12 @@
     worker-farm "1.7.0"
     worker-plugin "3.2.0"
 
-"@angular-devkit/build-ng-packagr@^0.803.1":
-  version "0.803.1"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/build-ng-packagr/-/build-ng-packagr-0.803.1.tgz#c65088954d682fa7f76e79897cd0c86b90b54795"
-  integrity sha512-bz7Qy0evb753jFc+vMuLlPFwpvmLVd5urfasce7DVJ1Xg1bSZxCXpqvh2jZN3PxMnJumkLs6ZoGyzrMmPsfqrg==
+"@angular-devkit/build-ng-packagr@^0.803.2":
+  version "0.803.2"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/build-ng-packagr/-/build-ng-packagr-0.803.2.tgz#795971f6fbeafacd280f4965fd5576452a4cace2"
+  integrity sha512-yVuq+DEJvcryWL9pZ7h4AqdUBYEqgQy+F1nwqpq03ZXKfnuZ42G7koANPXQM2jZ1MG7UwBwEJ59MIYv68IeL4A==
   dependencies:
-    "@angular-devkit/architect" "0.803.1"
+    "@angular-devkit/architect" "0.803.2"
     rxjs "6.4.0"
 
 "@angular-devkit/build-optimizer@0.803.2":
@@ -108,17 +100,6 @@
     "@angular-devkit/core" "8.3.2"
     rxjs "6.4.0"
     webpack-merge "4.2.1"
-
-"@angular-devkit/core@8.3.1":
-  version "8.3.1"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-8.3.1.tgz#6be526bd9c6351b1aaac3e9a083fbbeecdb9c848"
-  integrity sha512-H92REifFygP4a/0fsnshiz31KsuaHRrRHwfT67tVxPnN8rwWnTWkf5gxFwG8ezcBMnR5eVLBb/Xisnc/+A/8Kw==
-  dependencies:
-    ajv "6.10.2"
-    fast-json-stable-stringify "2.0.0"
-    magic-string "0.25.3"
-    rxjs "6.4.0"
-    source-map "0.7.3"
 
 "@angular-devkit/core@8.3.2":
   version "8.3.2"
