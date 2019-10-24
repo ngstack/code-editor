@@ -2,14 +2,6 @@
 # yarn lockfile v1
 
 
-"@angular-devkit/architect@0.803.13":
-  version "0.803.13"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.803.13.tgz#94ec501ac5b9819b4eb0213584ba94054ea007d7"
-  integrity sha512-fjitfdD+e4Y+5ltyuKd+5bfok+O9PZaDs9sji3DlNQLjc8k43RwTGE3GPrcLVIWy7dEUh1KkfuiuYFXY1QTemA==
-  dependencies:
-    "@angular-devkit/core" "8.3.13"
-    rxjs "6.4.0"
-
 "@angular-devkit/architect@0.803.14":
   version "0.803.14"
   resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.803.14.tgz#548d0a2e4e0052162c53ab75c50171e6496d4c0c"
@@ -80,12 +72,12 @@
     webpack-subresource-integrity "1.1.0-rc.6"
     worker-plugin "3.2.0"
 
-"@angular-devkit/build-ng-packagr@^0.803.13":
-  version "0.803.13"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/build-ng-packagr/-/build-ng-packagr-0.803.13.tgz#5ca1426a37732b0ab1559e11742165ed0ba4dc56"
-  integrity sha512-/6/+9NNbdeyudre1uqqM3n1eT/N+QzlLi0w3fnCFBMoJk/4UwFV6jW+zzSJO95IHrvQKHGlHcSHeNmjzjQWUpQ==
+"@angular-devkit/build-ng-packagr@^0.803.14":
+  version "0.803.14"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/build-ng-packagr/-/build-ng-packagr-0.803.14.tgz#491ad964cf7022095a92c9f127b04ce93ac89bef"
+  integrity sha512-qIYLEOxL8kOmOVjisN0rSMGeN7D2TYc90k73LnXUtT8WL4a+bd6r8PNGrH9hrF8ABZ01oJ4PQi8kuE4Jm7+ptA==
   dependencies:
-    "@angular-devkit/architect" "0.803.13"
+    "@angular-devkit/architect" "0.803.14"
     rxjs "6.4.0"
 
 "@angular-devkit/build-optimizer@0.803.14":
@@ -107,17 +99,6 @@
     "@angular-devkit/architect" "0.803.14"
     "@angular-devkit/core" "8.3.14"
     rxjs "6.4.0"
-
-"@angular-devkit/core@8.3.13":
-  version "8.3.13"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-8.3.13.tgz#8139de9eaaf0b56d62589b0b876bbe8d21d9ba7f"
-  integrity sha512-na+GZv2cMYfguBa2/godRzwJGHagd9K/eudqvsaSqc9hP3mGSF42+/4uFOVHzj0bRmxyFB5OQ2u29nwHMeq6DQ==
-  dependencies:
-    ajv "6.10.2"
-    fast-json-stable-stringify "2.0.0"
-    magic-string "0.25.3"
-    rxjs "6.4.0"
-    source-map "0.7.3"
 
 "@angular-devkit/core@8.3.14":
   version "8.3.14"
