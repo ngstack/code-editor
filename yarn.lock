@@ -2631,17 +2631,17 @@ cspell-dict-elixir@^1.0.11:
   dependencies:
     configstore "^5.0.0"
 
-cspell-dict-en-gb@^1.1.11:
-  version "1.1.11"
-  resolved "https://registry.yarnpkg.com/cspell-dict-en-gb/-/cspell-dict-en-gb-1.1.11.tgz#5f6dcc1eaa977191caa7129f0bafe5dec26b5822"
-  integrity sha512-UnmAeMDzf/YeXuI85BIaQzpArXlt+m+I9S9uy88nvUfq6goOfUFN8Axh0idDtqsFNoaMS5TgSzvjP7DgMXArYg==
+cspell-dict-en-gb@^1.1.13:
+  version "1.1.13"
+  resolved "https://registry.yarnpkg.com/cspell-dict-en-gb/-/cspell-dict-en-gb-1.1.13.tgz#5eadf8816b62c8a5aab9b64f2c770f4951fa759b"
+  integrity sha512-af3QfXtKbG1aMfUIHsnX8RCCY1/gkSNR7/u62lfl/O6zfbTLZZR8qZ1ezs4suVVoM5l4iAoUGvdO6KyEc+1kNA==
   dependencies:
     configstore "^5.0.0"
 
-cspell-dict-en_us@^1.2.18:
-  version "1.2.18"
-  resolved "https://registry.yarnpkg.com/cspell-dict-en_us/-/cspell-dict-en_us-1.2.18.tgz#db586b85f4ed37f81fc1607d30bcc4d44c95ceb9"
-  integrity sha512-P2TRblBVd9KOfwjvI5mxzEXMGBvvTIfqcKSQ+0RbpwC2S4ImW9k++LYxy9LtfSRmdSGjHbejYYtsrgvId1KcoA==
+cspell-dict-en_us@^1.2.20:
+  version "1.2.20"
+  resolved "https://registry.yarnpkg.com/cspell-dict-en_us/-/cspell-dict-en_us-1.2.20.tgz#70425831b678fca6505738df5e025e787f7859a6"
+  integrity sha512-LIK9Q/p6Ki7/BETZobLpkcCci/1GIN5de6ptVAWLOlzdtAlaEgomYa6fQ+ne4WNvZL+66fxPgxBTVfW/jFqqUw==
   dependencies:
     configstore "^5.0.0"
 
@@ -2765,10 +2765,10 @@ cspell-io@^4.0.19:
     iconv-lite "^0.4.24"
     iterable-to-stream "^1.0.1"
 
-cspell-lib@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/cspell-lib/-/cspell-lib-4.1.1.tgz#d3d9c9afa13d8cc2b0ae65e9e588a730e271b6f0"
-  integrity sha512-pG2SaJltAvE+Ci5aW7VDVHM/LJ0j3r7VgAG2ACXD4MUVxS+0Q8YWt6IBCzuwGx4DQzhR0fXw+owUphoV3eYabQ==
+cspell-lib@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/cspell-lib/-/cspell-lib-4.1.2.tgz#ff8493594761dbec5c8eded8b0b26e6ab2067209"
+  integrity sha512-ks0Xnqrb1w4Grf/PXvtdawkTzhMjSJT6w4EzSKtVo2j+sHxRzgKVk2xyq5L/I/JZegITPV7lBB8I2t08oBVHcA==
   dependencies:
     comment-json "^1.1.3"
     configstore "^5.0.0"
@@ -2777,8 +2777,8 @@ cspell-lib@^4.1.1:
     cspell-dict-django "^1.0.12"
     cspell-dict-dotnet "^1.0.12"
     cspell-dict-elixir "^1.0.11"
-    cspell-dict-en-gb "^1.1.11"
-    cspell-dict-en_us "^1.2.18"
+    cspell-dict-en-gb "^1.1.13"
+    cspell-dict-en_us "^1.2.20"
     cspell-dict-fonts "^1.0.3"
     cspell-dict-fullstack "^1.0.18"
     cspell-dict-golang "^1.1.12"
@@ -2799,7 +2799,7 @@ cspell-lib@^4.1.1:
     cspell-util-bundle "^4.0.6"
     fs-extra "^8.1.0"
     gensequence "^2.1.2"
-    vscode-uri "^2.0.3"
+    vscode-uri "^2.1.1"
 
 cspell-trie-lib@^4.1.1:
   version "4.1.1"
@@ -2814,16 +2814,16 @@ cspell-util-bundle@^4.0.6:
   resolved "https://registry.yarnpkg.com/cspell-util-bundle/-/cspell-util-bundle-4.0.6.tgz#8d3835707581ae51b291178b4cf54bb36e81c3de"
   integrity sha512-EaKvZOr2vzgYeXvEAX9lXNuUU5fA8E+xsaluA0oOQ7lNsNEMmDEjTuyroPpdes7KNuJSCvZeHjmWHU0YlUly7w==
 
-cspell@^4.0.31:
-  version "4.0.31"
-  resolved "https://registry.yarnpkg.com/cspell/-/cspell-4.0.31.tgz#b5e82948e208744e35c911d2759b897c4b39d1ec"
-  integrity sha512-C2x8/eZvEXtd9aO/MTiTS40FVd5uqKpChTRXpvnT6B9aiRjCzWvE6YeIh1QhwR3BQrPZP8JGFahgoDQpNitR5w==
+cspell@^4.0.32:
+  version "4.0.32"
+  resolved "https://registry.yarnpkg.com/cspell/-/cspell-4.0.32.tgz#541bb4a6e59661c99cdac0a24ef28e7b5c8bba57"
+  integrity sha512-sFSuWh8PCALqi23id0DxLRBpECXhfUqA92lQ4rc1GCfvioNSV91avhhzZvtDkxmVYqaZo8jvZjuM9KhRMLNVkg==
   dependencies:
     chalk "^2.4.2"
     commander "^2.20.3"
     comment-json "^1.1.3"
     cspell-glob "^0.1.12"
-    cspell-lib "^4.1.1"
+    cspell-lib "^4.1.2"
     fs-extra "^8.1.0"
     gensequence "^2.1.2"
     get-stdin "^7.0.0"
@@ -8400,10 +8400,10 @@ void-elements@^2.0.0:
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
   integrity sha1-wGavtYK7HLQSjWDqkjkulNXp2+w=
 
-vscode-uri@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/vscode-uri/-/vscode-uri-2.0.3.tgz#25e5f37f552fbee3cec7e5f80cef8469cefc6543"
-  integrity sha512-4D3DI3F4uRy09WNtDGD93H9q034OHImxiIcSq664Hq1Y1AScehlP3qqZyTkX/RWxeu0MRMHGkrxYqm2qlDF/aw==
+vscode-uri@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/vscode-uri/-/vscode-uri-2.1.1.tgz#5aa1803391b6ebdd17d047f51365cf62c38f6e90"
+  integrity sha512-eY9jmGoEnVf8VE8xr5znSah7Qt1P/xsCdErz+g8HYZtJ7bZqKH5E3d+6oVNm1AC/c6IHUDokbmVXKOi4qPAC9A==
 
 watchpack@^1.6.0:
   version "1.6.0"
