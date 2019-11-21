@@ -7,6 +7,10 @@ Code editor component for Angular applications.
 Based on the [Monaco](https://www.npmjs.com/package/monaco-editor) editor
 that powers [VS Code](https://github.com/Microsoft/vscode).
 
+<a href="https://www.buymeacoffee.com/denys" target="_blank">
+  <img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="51" width="217">
+</a>
+
 ## Live demos
 
 - [Angular 6](https://stackblitz.com/edit/ngstack-code-editor-ng6)
