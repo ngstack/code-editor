@@ -2885,10 +2885,10 @@ cspell-io@^4.0.19:
     iconv-lite "^0.4.24"
     iterable-to-stream "^1.0.1"
 
-cspell-lib@^4.1.12:
-  version "4.1.12"
-  resolved "https://registry.yarnpkg.com/cspell-lib/-/cspell-lib-4.1.12.tgz#9407f173af2dff72e1197d757902b7c74d8d4f79"
-  integrity sha512-kQMxV5pxfvMCRbgWby8UMlJvrw+6odbIJAptgyJzomOu303SXLDia7rXEkUBUlqWIfSYLWRfIwUoDquRdrXMwg==
+cspell-lib@^4.1.13:
+  version "4.1.13"
+  resolved "https://registry.yarnpkg.com/cspell-lib/-/cspell-lib-4.1.13.tgz#6db3d05e47feba29a34682c2f1a8b44c900ee308"
+  integrity sha512-s3gdPOQyqOW//bW9efdXWasqaOGjwj7jVoRLvLocN13Ls8Em2TAr33r6+sKTYkiOXBlTdUZuU5tDNWJjqkdrBw==
   dependencies:
     comment-json "^1.1.3"
     configstore "^5.0.0"
@@ -2917,34 +2917,34 @@ cspell-lib@^4.1.12:
     cspell-dict-software-terms "^1.0.5"
     cspell-dict-typescript "^1.0.3"
     cspell-io "^4.0.19"
-    cspell-trie-lib "^4.1.6"
-    cspell-util-bundle "^4.0.7"
+    cspell-trie-lib "^4.1.7"
+    cspell-util-bundle "^4.0.8"
     fs-extra "^8.1.0"
     gensequence "^3.0.1"
     vscode-uri "^2.1.1"
 
-cspell-trie-lib@^4.1.6:
-  version "4.1.6"
-  resolved "https://registry.yarnpkg.com/cspell-trie-lib/-/cspell-trie-lib-4.1.6.tgz#70f4ffb2b2d6ed94aaee4c9f3c8eaa698db39ed8"
-  integrity sha512-wIJoNhEU3tn1LKBwAwB1RM1d4hiumVi0DfY+z9YlhlLNBGQv5j1fZRtVBmT3ZwJu3/+1dQC/YHDnWEU8HJ7Bxw==
+cspell-trie-lib@^4.1.7:
+  version "4.1.7"
+  resolved "https://registry.yarnpkg.com/cspell-trie-lib/-/cspell-trie-lib-4.1.7.tgz#7f3f182cc2e886d4f84fb9ddb23f0a1cf3387122"
+  integrity sha512-iO9ntmF4lR1iSoxuLFnhR59Jvf99B2D6D/zgmxV5JmfPTXA4SrU3VjaIBAHmyafAT+qy3akaYOmGoyj8auIHfg==
   dependencies:
     gensequence "^3.0.1"
 
-cspell-util-bundle@^4.0.7:
-  version "4.0.7"
-  resolved "https://registry.yarnpkg.com/cspell-util-bundle/-/cspell-util-bundle-4.0.7.tgz#8752d280c0d0a18ca9490a6721173888e8602793"
-  integrity sha512-bhbxqJRFhNL5toJ9c/RSgLMDbQy2yq6KJ3I1WuZWDWJGE/1MOC5Hp1tzMLeGFGcxbX5+jJC9JQOv5f7RaWka3w==
+cspell-util-bundle@^4.0.8:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/cspell-util-bundle/-/cspell-util-bundle-4.0.8.tgz#e1646aa275b9ac27b51cf45a96556e7cc0b98b82"
+  integrity sha512-sybpmdyE5VZ2jH7q7toAIwXE2w3wp5Db09OXIrdav1t9wy7kCwUaEqYQtn4hqTM5+9HehDkSg0+lDvTuKKbhNg==
 
-cspell@^4.0.42:
-  version "4.0.42"
-  resolved "https://registry.yarnpkg.com/cspell/-/cspell-4.0.42.tgz#4b5132ed7854892f5fa4d2b5e8010e442aa1e36d"
-  integrity sha512-N7HgDg8hZYe1SKp+X6UTh1xiEqKwp5elus/+N/BzXA/yhn77M5eUKp/+Dk3WKHd3jSZS0q8Y6YUcsTrwcONR6g==
+cspell@^4.0.43:
+  version "4.0.43"
+  resolved "https://registry.yarnpkg.com/cspell/-/cspell-4.0.43.tgz#2467936f880b2700382f5dd59ed210cc7e4d0ba8"
+  integrity sha512-msnehTsodBA7XX/lnEdQPC2jqhvdsb7Mqd/Ps2OSNmN0nS1fHYAC9wx2hD5E6wRCfsCmxxcaW0s1VXi0v26ujQ==
   dependencies:
     chalk "^2.4.2"
     commander "^2.20.3"
     comment-json "^1.1.3"
     cspell-glob "^0.1.13"
-    cspell-lib "^4.1.12"
+    cspell-lib "^4.1.13"
     fs-extra "^8.1.0"
     gensequence "^3.0.1"
     get-stdin "^7.0.0"
