@@ -14,10 +14,11 @@
     "types": [],
     "lib": [
       "dom",
-      "es2015"
+      "es2018"
     ]
   },
   "angularCompilerOptions": {
+    "enableIvy": false,
     "annotateForClosureCompiler": true,
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true,
