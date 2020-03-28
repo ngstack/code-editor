@@ -16,7 +16,7 @@ import { JsonDefaultsService } from './services/json-defaults.service';
   exports: [CodeEditorComponent]
 })
 export class CodeEditorModule {
-  static forRoot(settings?: CodeEditorSettings): ModuleWithProviders {
+  static forRoot(settings?: CodeEditorSettings): ModuleWithProviders<CodeEditorModule> {
     return {
       ngModule: CodeEditorModule,
       providers: [
@@ -29,7 +29,7 @@ export class CodeEditorModule {
     };
   }
 
-  static forChild(): ModuleWithProviders {
+  static forChild(): ModuleWithProviders<CodeEditorModule> {
     return {
       ngModule: CodeEditorModule
     };

@@ -36,7 +36,7 @@ export class CodeEditorDemoComponent implements OnInit {
   isLoading = false;
   isLoading$: Observable<boolean>;
 
-  @ViewChild('file', { static: false })
+  @ViewChild('file')
   fileInput: ElementRef;
 
   options = {
