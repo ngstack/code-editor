@@ -2,7 +2,7 @@ pull_request_rules:
   - name: automatic merge for Dependabot pull requests
     conditions:
       - author=dependabot-preview[bot]
-      - status-success=ngstack.code-editor
+      - status-success=build (12.x)
     actions:
       merge:
         method: merge
