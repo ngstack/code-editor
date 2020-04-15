@@ -1,12 +1,12 @@
 {
   "name": "@ngstack/code-editor",
   "description": "Code editor component for Angular applications.",
-  "version": "0.4.8",
+  "version": "1.0.0",
   "license": "MIT",
   "author": {
     "name": "Denys Vuika",
     "email": "denys.vuika@gmail.com",
-    "url": "https://medium.com/@DenysVuika"
+    "url": "https://denys.dev"
   },
   "keywords": [
     "angular",
@@ -22,7 +22,7 @@
     "url": "https://github.com/ngstack/code-editor/issues"
   },
   "peerDependencies": {
-    "@angular/common": "^6.0.0",
-    "@angular/core": "^6.0.0"
+    "@angular/common": "^9.1.1",
+    "@angular/core": "^9.1.1"
   }
 }

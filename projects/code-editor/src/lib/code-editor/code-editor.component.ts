@@ -12,7 +12,7 @@ import {
   EventEmitter,
   SimpleChanges,
   OnInit,
-  HostListener
+  HostListener,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CodeEditorService } from '../services/code-editor.service';
@@ -29,8 +29,8 @@ declare const monaco: any;
   styleUrls: ['./code-editor.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  // tslint:disable-next-line:use-host-property-decorator
-  host: { class: 'ngs-code-editor' }
+  // tslint:disable-next-line
+  host: { class: 'ngs-code-editor' },
 })
 export class CodeEditorComponent
   implements OnInit, OnChanges, OnDestroy, AfterViewInit {
@@ -42,8 +42,8 @@ export class CodeEditorComponent
     lineNumbers: true,
     contextmenu: false,
     minimap: {
-      enabled: false
-    }
+      enabled: false,
+    },
   };
 
   private subscriptions: Subscription[] = [];
@@ -110,7 +110,7 @@ export class CodeEditorComponent
   ngOnInit() {}
 
   ngOnDestroy() {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
     this.subscriptions = [];
 
     if (this._editor) {
@@ -132,7 +132,7 @@ export class CodeEditorComponent
     if (changes.readOnly && !changes.readOnly.firstChange) {
       if (this._editor) {
         this._editor.updateOptions({
-          readOnly: changes.readOnly.currentValue
+          readOnly: changes.readOnly.currentValue,
         });
       }
     }
@@ -161,7 +161,7 @@ export class CodeEditorComponent
       value: '',
       language: 'text',
       uri: 'code',
-      ...this.codeModel
+      ...this.codeModel,
     };
 
     this._model = monaco.editor.createModel(
@@ -173,12 +173,12 @@ export class CodeEditorComponent
     const options = Object.assign({}, this.defaultOptions, this.options, {
       readOnly: this.readOnly,
       theme: this.theme,
-      model: this._model
+      model: this._model,
     });
 
     this._editor = monaco.editor.create(domElement, options);
 
-    this._model.onDidChangeContent(e => {
+    this._model.onDidChangeContent((e) => {
       const newValue = this._model.getValue();
       if (this.codeModel) {
         this.codeModel.value = newValue;
