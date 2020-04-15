@@ -4,7 +4,7 @@ import {
   ElementRef,
   OnInit,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { CodeEditorService, CodeModel } from '@ngstack/code-editor';
@@ -18,7 +18,7 @@ import { FileNode, FileNodeType } from './file-node';
   templateUrl: './code-editor-demo.component.html',
   styleUrls: ['./code-editor-demo.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  providers: [FileDatabase]
+  providers: [FileDatabase],
 })
 export class CodeEditorDemoComponent implements OnInit {
   nestedTreeControl: NestedTreeControl<FileNode>;
@@ -27,7 +27,7 @@ export class CodeEditorDemoComponent implements OnInit {
   themes = [
     { name: 'Visual Studio', value: 'vs' },
     { name: 'Visual Studio Dark', value: 'vs-dark' },
-    { name: 'High Contrast Dark', value: 'hc-black' }
+    { name: 'High Contrast Dark', value: 'hc-black' },
   ];
 
   selectedModel: CodeModel = null;
@@ -42,21 +42,24 @@ export class CodeEditorDemoComponent implements OnInit {
   options = {
     contextmenu: true,
     minimap: {
-      enabled: false
-    }
+      enabled: false,
+    },
   };
 
   constructor(database: FileDatabase, editorService: CodeEditorService) {
     this.nestedTreeControl = new NestedTreeControl<FileNode>(this._getChildren);
     this.nestedDataSource = new MatTreeNestedDataSource();
 
-    database.dataChange.subscribe(data => (this.nestedDataSource.data = data));
+    database.dataChange.subscribe(
+      (data) => (this.nestedDataSource.data = data)
+    );
 
     this.isLoading$ = editorService.loadingTypings.pipe(debounceTime(300));
   }
 
-  hasNestedChild = (_: number, nodeData: FileNode) =>
-    nodeData.type === FileNodeType.folder;
+  hasNestedChild(_: number, nodeData: FileNode): boolean {
+    return nodeData.type === FileNodeType.folder;
+  }
 
   private _getChildren = (node: FileNode) => node.children;
 
