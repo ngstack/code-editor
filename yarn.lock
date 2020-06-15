@@ -206,10 +206,10 @@
   resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-9.1.1.tgz#3090829dd2989207fd9a4dbc5b44b3ff9b2fe948"
   integrity sha512-NX+LuK8JFisiq3uHCOK6YoN/yIb2R9Ye5mwiOPkuZA3lZLKCnUXqCHZbM8VHy/WdjIxxeUaFMJc38yV8RVoabg==
 
-"@angular/language-service@^9.1.9":
-  version "9.1.9"
-  resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-9.1.9.tgz#332a7e54d5e553b92342b10703dc13aba474a28f"
-  integrity sha512-yT6HPpdAe2mD9HRoTCiWFog1MRJt+0j+CLbI/Ql7C6pH6vbjmfsJ55xMmQ7eS6trsnebpMWTUv1f2GRykv3ygw==
+"@angular/language-service@^9.1.11":
+  version "9.1.11"
+  resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-9.1.11.tgz#a2afed4f0167e6f4d3d748214b8e1c27980703ce"
+  integrity sha512-jfm4etbqldj6MTwECwyoAs7tXEAR8K/8P8dBZnsELhY+V8oFidTJI3NY52PB3Ym7leSPorYdOAeUMMuQfPaVxg==
 
 "@angular/material@^9.2.1":
   version "9.2.1"
