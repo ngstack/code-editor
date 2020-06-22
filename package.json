@@ -28,7 +28,7 @@
     "@angular/material": "^9.2.1",
     "@angular/platform-browser": "^9.1.1",
     "@angular/platform-browser-dynamic": "^9.1.1",
-    "@angular/router": "^9.1.1",
+    "@angular/router": "^9.1.11",
     "monaco-editor": "^0.20.0",
     "rxjs": "^6.5.5",
     "tslib": "^1.13.0",
