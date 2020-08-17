@@ -1,7 +1,5 @@
 # @ngstack/code-editor
 
-[![Build Status](https://dev.azure.com/ngstack/code-editor/_apis/build/status/ngstack.code-editor?branchName=master)](https://dev.azure.com/ngstack/code-editor/_build/latest?definitionId=2&branchName=master)
-
 Code editor component for Angular applications.
 
 Based on the [Monaco](https://www.npmjs.com/package/monaco-editor) editor
