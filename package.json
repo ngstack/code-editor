@@ -5,6 +5,7 @@
   "license": "MIT",
   "author": "Denys Vuika <denys.vuika@gmail.com>",
   "scripts": {
+    "postinstall": "ngcc",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
