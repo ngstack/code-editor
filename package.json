@@ -11,7 +11,6 @@
     "build": "ng build",
     "test": "ng test code-editor --browsers=ChromeHeadless",
     "lint": "ng lint",
-    "e2e": "ng e2e",
     "spellcheck": "cspell 'src/**/*.ts' 'e2e/**/*.ts' 'projects/**/*.ts'",
     "build:lib": "ng build code-editor && cp -R projects/code-editor/src/lib/workers dist/@ngstack/code-editor",
     "build:prod": "ng build code-editor --prod && cp -R projects/code-editor/src/lib/workers dist/@ngstack/code-editor",
@@ -54,8 +53,6 @@
     "karma-jasmine": "^3.3.1",
     "karma-jasmine-html-reporter": "^1.5.4",
     "ng-packagr": "^10.0.4",
-    "protractor": "^7.0.0",
-    "ts-node": "^8.10.2",
     "tslint": "~6.1.2",
     "typescript": "3.9.7"
   }
