@@ -11,7 +11,8 @@ import { CodeEditorSettings } from './editor-settings';
 import { JsonDefaultsService } from './services/json-defaults.service';
 
 export function setupEditorService(service: CodeEditorService) {
-  return () => service.loadEditor();
+  const result = () => service.loadEditor();
+  return result;
 }
 
 @NgModule({
