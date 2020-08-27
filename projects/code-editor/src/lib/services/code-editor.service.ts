@@ -19,7 +19,7 @@ export interface TypingsInfo {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CodeEditorService {
   // baseUrl = 'assets/monaco';
@@ -30,7 +30,7 @@ export class CodeEditorService {
     'https://unpkg.com/@ngstack/code-editor/workers/typings-worker.js';
 
   typingsLoaded = new Subject<TypingsInfo>();
-  loaded = new Subject<{ monaco: any }>();
+  loaded = new BehaviorSubject<{ monaco: any }>(null);
 
   loadingTypings = new BehaviorSubject<boolean>(false);
 
@@ -44,7 +44,7 @@ export class CodeEditorService {
     const defaults = {
       baseUrl: this.baseUrl,
       typingsWorkerUrl: this.typingsWorkerUrl,
-      ...settings
+      ...settings,
     };
 
     this.baseUrl = defaults.baseUrl;
@@ -62,7 +62,7 @@ export class CodeEditorService {
       } else {
         this.typingsWorker = new Worker(this.typingsWorkerUrl);
       }
-      this.typingsWorker.addEventListener('message', e => {
+      this.typingsWorker.addEventListener('message', (e) => {
         this.loadingTypings.next(false);
         this.typingsLoaded.next(e.data);
       });
@@ -76,17 +76,17 @@ export class CodeEditorService {
       if (worker) {
         this.loadingTypings.next(true);
         worker.postMessage({
-          dependencies
+          dependencies,
         });
       }
     }
   }
 
   loadEditor(): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       const onGotAmdLoader = () => {
         (<any>window).require.config({
-          paths: { vs: `${this.baseUrl}/vs` }
+          paths: { vs: `${this.baseUrl}/vs` },
         });
 
         if (this.baseUrl.startsWith('http')) {
@@ -100,9 +100,9 @@ export class CodeEditorService {
             new Blob([proxyScript], { type: 'text/javascript' })
           );
           window['MonacoEnvironment'] = {
-            getWorkerUrl: function() {
+            getWorkerUrl: function () {
               return proxy;
-            }
+            },
           };
         }
 

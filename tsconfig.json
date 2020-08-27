@@ -18,6 +18,12 @@
     },
     {
       "path": "./projects/code-editor/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/multiple-editors/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/multiple-editors/tsconfig.spec.json"
     }
   ]
 }

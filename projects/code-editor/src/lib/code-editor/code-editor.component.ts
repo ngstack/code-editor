@@ -11,10 +11,8 @@ import {
   Output,
   EventEmitter,
   SimpleChanges,
-  OnInit,
   HostListener,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { CodeEditorService } from '../services/code-editor.service';
 import { TypescriptDefaultsService } from '../services/typescript-defaults.service';
 import { JavascriptDefaultsService } from '../services/javascript-defaults.service';
@@ -33,7 +31,7 @@ declare const monaco: any;
   host: { class: 'ngs-code-editor' },
 })
 export class CodeEditorComponent
-  implements OnInit, OnChanges, OnDestroy, AfterViewInit {
+  implements OnChanges, OnDestroy, AfterViewInit {
   private _editor: any;
   private _model: any;
   // private _value = '';
@@ -46,10 +44,8 @@ export class CodeEditorComponent
     },
   };
 
-  private subscriptions: Subscription[] = [];
-
   @ViewChild('editor', { static: true })
-  editorContent: ElementRef;
+  editorContent: ElementRef<HTMLDivElement>;
 
   @Input()
   codeModel: CodeModel;
@@ -101,18 +97,13 @@ export class CodeEditorComponent
   loaded = new EventEmitter();
 
   constructor(
-    private editorService: CodeEditorService,
-    private typescriptDefaults: TypescriptDefaultsService,
-    private javascriptDefaults: JavascriptDefaultsService,
-    private jsonDefaults: JsonDefaultsService
+    protected editorService: CodeEditorService,
+    protected typescriptDefaults: TypescriptDefaultsService,
+    protected javascriptDefaults: JavascriptDefaultsService,
+    protected jsonDefaults: JsonDefaultsService
   ) {}
 
-  ngOnInit() {}
-
   ngOnDestroy() {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
-    this.subscriptions = [];
-
     if (this._editor) {
       this._editor.dispose();
       this._editor = null;
@@ -150,17 +141,16 @@ export class CodeEditorComponent
   }
 
   async ngAfterViewInit() {
-    await this.editorService.loadEditor();
     this.setupEditor();
     this.loaded.emit();
   }
 
   private setupEditor() {
-    const domElement: HTMLDivElement = this.editorContent.nativeElement;
+    const domElement = this.editorContent.nativeElement;
     const settings = {
       value: '',
       language: 'text',
-      uri: 'code',
+      uri: `code-${Date.now()}`,
       ...this.codeModel,
     };
 
@@ -178,7 +168,7 @@ export class CodeEditorComponent
 
     this._editor = monaco.editor.create(domElement, options);
 
-    this._model.onDidChangeContent((e) => {
+    this._model.onDidChangeContent((/*e*/) => {
       const newValue = this._model.getValue();
       if (this.codeModel) {
         this.codeModel.value = newValue;
