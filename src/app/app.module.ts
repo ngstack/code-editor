@@ -20,7 +20,7 @@ const routes: Route[] = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes, { initialNavigation: 'enabled' }),
+    RouterModule.forRoot(routes, { initialNavigation: 'enabled', relativeLinkResolution: 'legacy' }),
     FlexLayoutModule,
     MaterialModule,
 
