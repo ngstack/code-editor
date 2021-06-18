@@ -30,7 +30,7 @@ export class CodeEditorService {
     'https://unpkg.com/@ngstack/code-editor/workers/typings-worker.js';
 
   typingsLoaded = new Subject<TypingsInfo>();
-  loaded = new BehaviorSubject<{ monaco: any }>(null);
+  loaded = new Subject<{ monaco: any }>();
 
   loadingTypings = new BehaviorSubject<boolean>(false);
 
@@ -82,7 +82,7 @@ export class CodeEditorService {
     }
   }
 
-  loadEditor(): Promise<any> {
+  loadEditor(): Promise<void> {
     return new Promise((resolve) => {
       const onGotAmdLoader = () => {
         (<any>window).require.config({
