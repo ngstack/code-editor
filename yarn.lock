@@ -5558,10 +5558,15 @@ iterable-to-stream@^2.0.0:
   resolved "https://registry.yarnpkg.com/iterable-to-stream/-/iterable-to-stream-2.0.0.tgz#8cc654ab9b1011dc138e681fee2c0f0bb3cc7e3c"
   integrity sha512-efkLePxXjJk92hvN+2rS3tGJTRn8/tqXjmZvPI6LQ29xCj2sUF4zW8hkMsVe3jpTkxtMZ89xsKnz9FaRqNWM6g==
 
-jasmine-core@^3.6.0, jasmine-core@~3.7.1:
+jasmine-core@^3.6.0:
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-3.7.1.tgz#0401327f6249eac993d47bbfa18d4e8efacfb561"
   integrity sha512-DH3oYDS/AUvvr22+xUBW62m1Xoy7tUlY1tsxKEJvl5JeJ7q8zd1K5bUwiOxdH+erj6l2vAMM3hV25Xs9/WrmuQ==
+
+jasmine-core@~4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-4.0.1.tgz#ea4b0495d82155023bd56c25181d9f9b623f61b8"
+  integrity sha512-w+JDABxQCkxbGGxg+a2hUVZyqUS2JKngvIyLGu/xiw2ZwgsoSB0iiecLQsQORSeaKQ6iGrCyWG86RfNDuoA7Lg==
 
 jasmine-spec-reporter@~7.0.0:
   version "7.0.0"
