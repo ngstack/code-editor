@@ -22,16 +22,18 @@ import { CodeModel } from '../models/code.model';
 declare const monaco: any;
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'ngs-code-editor',
   templateUrl: './code-editor.component.html',
   styleUrls: ['./code-editor.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  // tslint:disable-next-line
+  // eslint-disable-next-line
   host: { class: 'ngs-code-editor' },
 })
 export class CodeEditorComponent
-  implements OnChanges, OnDestroy, AfterViewInit {
+  implements OnChanges, OnDestroy, AfterViewInit
+{
   private _editor: any;
   private _model: any;
   // private _value = '';
