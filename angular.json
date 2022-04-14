@@ -16,7 +16,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "aot": true,
             "outputPath": "dist/app",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -43,7 +42,13 @@
               },
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -67,7 +72,8 @@
               "vendorChunk": false,
               "buildOptimizer": true
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -164,7 +170,6 @@
             "main": "projects/multiple-editors/src/main.ts",
             "polyfills": "projects/multiple-editors/src/polyfills.ts",
             "tsConfig": "projects/multiple-editors/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/multiple-editors/src/favicon.ico",
               "projects/multiple-editors/src/assets",
@@ -182,7 +187,13 @@
             "styles": [
               "projects/multiple-editors/src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -212,7 +223,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
