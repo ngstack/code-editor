@@ -82,6 +82,7 @@ export class CodeEditorDemoComponent implements OnInit {
     this.selectedModel = node.code;
   }
 
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit() {
     /*
     this.selectedModel = {
