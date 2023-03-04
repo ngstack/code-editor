@@ -21,9 +21,8 @@ const routes: Route[] = [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes, {
-      initialNavigation: 'enabledBlocking',
-      relativeLinkResolution: 'legacy',
-    }),
+    initialNavigation: 'enabledBlocking'
+}),
     FlexLayoutModule,
     MaterialModule,
 
