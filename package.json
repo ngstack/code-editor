@@ -6,9 +6,8 @@
   "author": "Denys Vuika <denys.vuika@gmail.com>",
   "scripts": {
     "postinstall": "ngcc",
-    "ng": "ng",
-    "start": "ng serve --open",
-    "build": "ng build",
+    "start": "ng serve app --open",
+    "build": "ng build app",
     "test": "ng test code-editor --browsers=ChromeHeadless",
     "lint": "ng lint",
     "spellcheck": "cspell 'src/**/*.ts' 'e2e/**/*.ts' 'projects/**/*.ts'",
