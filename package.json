@@ -1,7 +1,7 @@
 {
   "name": "@ngstack/core",
   "description": "An open source toolkit for enterprise Angular applications.",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "license": "MIT",
   "author": "Denys Vuika <denys.vuika@gmail.com>",
   "scripts": {
