@@ -15,12 +15,12 @@ export function modules() {
     MatIconModule,
     MatMenuModule,
     MatTreeModule,
-    MatProgressBarModule
+    MatProgressBarModule,
   ];
 }
 
 @NgModule({
   imports: modules(),
-  exports: modules()
+  exports: modules(),
 })
 export class MaterialModule {}
