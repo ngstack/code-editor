@@ -4,7 +4,9 @@
   "newProjectRoot": "projects",
   "cli": {
     "packageManager": "npm",
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   },
   "projects": {
     "app": {
@@ -268,10 +270,15 @@
       }
     }
   },
-  "defaultProject": "app",
   "schematics": {
     "@schematics/angular:component": {
       "style": "scss"
+    },
+    "@angular-eslint/schematics:application": {
+      "setParserOptionsProject": true
+    },
+    "@angular-eslint/schematics:library": {
+      "setParserOptionsProject": true
     }
   }
 }

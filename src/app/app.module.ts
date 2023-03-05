@@ -12,15 +12,17 @@ import { MaterialModule } from './material.module';
 const routes: Route[] = [
   {
     path: '',
-    component: CodeEditorDemoComponent
-  }
+    component: CodeEditorDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes, { initialNavigation: 'enabled', relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot(routes, {
+    initialNavigation: 'enabledBlocking'
+}),
     FlexLayoutModule,
     MaterialModule,
 
@@ -28,10 +30,10 @@ const routes: Route[] = [
       // use local Monaco installation
       baseUrl: 'assets/monaco',
       // use local Typings Worker
-      typingsWorkerUrl: 'assets/workers/typings-worker.js'
-    })
+      typingsWorkerUrl: 'assets/workers/typings-worker.js',
+    }),
   ],
   declarations: [AppComponent, CodeEditorDemoComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

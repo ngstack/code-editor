@@ -1,7 +1,7 @@
 {
   "name": "@ngstack/code-editor",
   "description": "Code editor component for Angular applications.",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "license": "MIT",
   "author": {
     "name": "Denys Vuika",
@@ -23,8 +23,8 @@
     "url": "https://github.com/ngstack/code-editor/issues"
   },
   "peerDependencies": {
-    "@angular/common": ">=13.3.3",
-    "@angular/core": ">=13.3.3"
+    "@angular/common": ">=15.2.1",
+    "@angular/core": ">=15.2.1"
   },
   "dependencies": {
     "tslib": "^2.0.0"
