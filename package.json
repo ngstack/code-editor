@@ -47,7 +47,7 @@
     "@types/jasminewd2": "^2.0.9",
     "@types/node": "^18.14.6",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
-    "@typescript-eslint/parser": "^5.43.0",
+    "@typescript-eslint/parser": "^5.54.1",
     "cspell": "^6.28.0",
     "eslint": "^8.28.0",
     "jasmine-core": "~4.5.0",
