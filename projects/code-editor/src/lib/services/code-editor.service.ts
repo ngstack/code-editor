@@ -27,7 +27,7 @@ export class CodeEditorService {
 
   // typingsWorkerUrl = 'assets/workers/typings-worker.js';
   typingsWorkerUrl =
-    'https://unpkg.com/@ngstack/code-editor/workers/typings-worker.js';
+    'https://cdn.jsdelivr.net/npm/@ngstack/code-editor/workers/typings-worker.js';
 
   typingsLoaded = new Subject<TypingsInfo>();
   loaded = new Subject<{ monaco: any }>();
