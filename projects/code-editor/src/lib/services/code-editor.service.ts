@@ -23,7 +23,7 @@ export interface TypingsInfo {
 })
 export class CodeEditorService {
   // baseUrl = 'assets/monaco';
-  baseUrl = 'https://unpkg.com/monaco-editor/min';
+  baseUrl = 'https://cdn.jsdelivr.net/npm/monaco-editor/min/';
 
   // typingsWorkerUrl = 'assets/workers/typings-worker.js';
   typingsWorkerUrl =
