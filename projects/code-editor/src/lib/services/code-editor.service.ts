@@ -22,10 +22,8 @@ export interface TypingsInfo {
   providedIn: 'root',
 })
 export class CodeEditorService {
-  // baseUrl = 'assets/monaco';
-  baseUrl = 'https://cdn.jsdelivr.net/npm/monaco-editor/min/';
+  baseUrl = 'https://cdn.jsdelivr.net/npm/monaco-editor/min';
 
-  // typingsWorkerUrl = 'assets/workers/typings-worker.js';
   typingsWorkerUrl =
     'https://cdn.jsdelivr.net/npm/@ngstack/code-editor/workers/typings-worker.js';
 
