@@ -54,7 +54,7 @@ Update component controller class and provide corresponding properties and event
 export class AppComponent {
   theme = 'vs-dark';
 
-  codeModel: CodeModel = {
+  model: CodeModel = {
     language: 'json',
     uri: 'main.json',
     value: '{}',
