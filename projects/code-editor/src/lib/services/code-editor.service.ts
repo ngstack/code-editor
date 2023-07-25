@@ -30,7 +30,7 @@ export class CodeEditorService {
     'https://unpkg.com/@ngstack/code-editor/workers/typings-worker.js';
 
   typingsLoaded = new Subject<TypingsInfo>();
-  loaded = new BehaviorSubject<{ monaco: any }>();
+  loaded = new BehaviorSubject<{ monaco: any } | null>(null);
 
   loadingTypings = new BehaviorSubject<boolean>(false);
 
