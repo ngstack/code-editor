@@ -208,7 +208,7 @@ Install the `monaco-editor`:
 npm install monaco-editor
 ```
 
-Update the `.angular-cli.json` file and append the following asset rule:
+Update the `angular.json` file and append the following asset rule:
 
 ```json
 {
@@ -238,7 +238,7 @@ export class AppModule {}
 
 ### Typings Worker
 
-Update the `.angular-cli.json` file and append the following asset rule:
+Update the `angular.json` file and append the following asset rule:
 
 ```ts
 {
