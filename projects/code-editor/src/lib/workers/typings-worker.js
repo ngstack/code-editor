@@ -17,7 +17,6 @@ const loadContent = async url => {
     }
 
     const response = await fetch(url);
-    console.log(response.status, url);
 
     if (response.status >= 200 && response.status < 300) {
       const text = await response.text();
