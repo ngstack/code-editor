@@ -1,7 +1,7 @@
 // This worker resolves typings (.d.ts files) for the given list of dependencies.
 
 self.importScripts([
-  'https://cdnjs.cloudflare.com/ajax/libs/typescript/2.8.3/typescript.min.js'
+  'https://cdnjs.cloudflare.com/ajax/libs/typescript/4.9.5/typescript.min.js'
 ]);
 
 const PACKAGES_SOURCE = 'https://unpkg.com';
