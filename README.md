@@ -100,7 +100,7 @@ export interface CodeModel {
 
 ### Editor Options
 
-For available options see [IEditorConstructionOptions](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditorconstructionoptions.html) docs.
+For available options see [IEditorConstructionOptions](https://microsoft.github.io/monaco-editor/typedoc/interfaces/editor.IEditorConstructionOptions.html) docs.
 
 The following options are used by default when Editor Component gets created:
 
