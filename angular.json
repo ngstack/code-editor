@@ -17,12 +17,15 @@
       "schematics": {},
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/app",
+            "outputPath": {
+              "base": "dist/app"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "src/polyfills.ts"
+            ],
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
@@ -46,12 +49,11 @@
               "src/styles.css"
             ],
             "scripts": [],
-            "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
-            "namedChunks": true
+            "namedChunks": true,
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -71,9 +73,7 @@
               "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true
+              "extractLicenses": true
             }
           },
           "defaultConfiguration": ""
@@ -81,11 +81,11 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "app:build"
+            "buildTarget": "app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "app:build:production"
+              "buildTarget": "app:build:production"
             }
           }
         },
@@ -167,12 +167,15 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/multiple-editors",
+            "outputPath": {
+              "base": "dist/multiple-editors"
+            },
             "index": "projects/multiple-editors/src/index.html",
-            "main": "projects/multiple-editors/src/main.ts",
-            "polyfills": "projects/multiple-editors/src/polyfills.ts",
+            "polyfills": [
+              "projects/multiple-editors/src/polyfills.ts"
+            ],
             "tsConfig": "projects/multiple-editors/tsconfig.app.json",
             "assets": [
               "projects/multiple-editors/src/favicon.ico",
@@ -192,12 +195,11 @@
               "projects/multiple-editors/src/styles.css"
             ],
             "scripts": [],
-            "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
-            "namedChunks": true
+            "namedChunks": true,
+            "browser": "projects/multiple-editors/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -212,8 +214,6 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -233,11 +233,11 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "multiple-editors:build"
+            "buildTarget": "multiple-editors:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "multiple-editors:build:production"
+              "buildTarget": "multiple-editors:build:production"
             }
           }
         },
