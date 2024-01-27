@@ -2,18 +2,42 @@ import { NestedTreeControl } from '@angular/cdk/tree';
 import {
   Component,
   ElementRef,
+  HostBinding,
   OnInit,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { MatTreeNestedDataSource } from '@angular/material/tree';
-import { CodeEditorService, CodeModel } from '@ngstack/code-editor';
+import { MatTreeModule, MatTreeNestedDataSource } from '@angular/material/tree';
+import {
+  CodeEditorModule,
+  CodeEditorService,
+  CodeModel,
+} from '@ngstack/code-editor';
 import { Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { FileDatabase } from './file-database';
 import { FileNode, FileNodeType } from './file-node';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
+  standalone: true,
+  imports: [
+    NgIf,
+    NgFor,
+    AsyncPipe,
+    MatButtonModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatTreeModule,
+    CodeEditorModule,
+  ],
   selector: 'app-code-editor-demo',
   templateUrl: './code-editor-demo.component.html',
   styleUrls: ['./code-editor-demo.component.scss'],
@@ -38,6 +62,9 @@ export class CodeEditorDemoComponent implements OnInit {
 
   @ViewChild('file')
   fileInput: ElementRef;
+
+  @HostBinding('class')
+  class = 'app-code-editor-demo';
 
   options = {
     contextmenu: true,

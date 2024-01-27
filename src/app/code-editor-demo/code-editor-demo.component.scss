@@ -1,3 +1,32 @@
+.demo-layout-root {
+  height: 100%;
+  min-height: 100%;
+  min-width: 100%;
+  width: 100%;
+  flex-direction: column;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.page-layout {
+  flex-direction: row;
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 1 1e-9px;
+}
+
+.page-layout-sidebar {
+  flex: 1 1 100%;
+  box-sizing: border-box;
+  max-width: 20%;
+}
+
+.page-layout-content {
+  flex: 1 1 100%;
+  box-sizing: border-box;
+  max-width: 80%;
+}
+
 .ngs-code-editor {
   display: flex;
   flex-direction: column;
@@ -31,7 +60,8 @@
   &-invisible {
     display: none;
   }
-  ul, li {
+  ul,
+  li {
     margin-top: 0;
     margin-bottom: 0;
     list-style-type: none;
