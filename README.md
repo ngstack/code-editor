@@ -9,10 +9,6 @@ that powers [VS Code](https://github.com/Microsoft/vscode).
   <img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="51" width="217">
 </a>
 
-## Live demos
-
-- [Angular 6](https://stackblitz.com/edit/ngstack-code-editor-ng6)
-
 ## Installing
 
 ```sh
@@ -39,13 +35,7 @@ export class AppModule {}
 Update template to use the `ngs-code-editor`:
 
 ```html
-<ngs-code-editor
-  [theme]="theme"
-  [codeModel]="model"
-  [options]="options"
-  (valueChanged)="onCodeChanged($event)"
->
-</ngs-code-editor>
+<ngs-code-editor [theme]="theme" [codeModel]="model" [options]="options" (valueChanged)="onCodeChanged($event)"></ngs-code-editor>
 ```
 
 Update component controller class and provide corresponding properties and events:
