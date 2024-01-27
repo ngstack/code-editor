@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Route } from '@angular/router';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { CodeEditorModule } from '@ngstack/code-editor';
 
 import { AppComponent } from './app.component';
@@ -21,9 +20,8 @@ const routes: Route[] = [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes, {
-    initialNavigation: 'enabledBlocking'
-}),
-    FlexLayoutModule,
+      initialNavigation: 'enabledBlocking',
+    }),
     MaterialModule,
 
     CodeEditorModule.forRoot({

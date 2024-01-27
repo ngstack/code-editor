@@ -2,6 +2,7 @@ import { NestedTreeControl } from '@angular/cdk/tree';
 import {
   Component,
   ElementRef,
+  HostBinding,
   OnInit,
   ViewChild,
   ViewEncapsulation,
@@ -38,6 +39,9 @@ export class CodeEditorDemoComponent implements OnInit {
 
   @ViewChild('file')
   fileInput: ElementRef;
+
+  @HostBinding('class')
+  class = 'app-code-editor-demo';
 
   options = {
     contextmenu: true,
