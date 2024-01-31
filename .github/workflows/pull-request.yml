@@ -15,15 +15,14 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node: 18
         cache: 'npm'
-        node-version: 18
+        node-version: 20
     - name: Test
       run: |
-        npm ci
-        npm run lint
-        npm run spellcheck
-        # npm run test:ci
+        npm ci && \
+        npm run lint && \
+        npm run spellcheck && \
+        # npm run test:ci && \
         npm run build:prod
       env:
         CI: true
