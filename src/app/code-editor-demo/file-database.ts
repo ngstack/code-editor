@@ -55,9 +55,8 @@ const FILES_DATA: FileNode[] = [
           uri: 'main.json',
           value: [
             '{',
-            '    "$schema": "http://myserver/foo-schema.json",',
-            '    "p1": "v3",',
-            '    "p2": false',
+            '    "$schema": "http://custom/schema.json",',
+            '    "type": "button"',
             '}'
           ].join('\n'),
           schemas: [
