@@ -9,8 +9,8 @@ import { CodeEditorDemoComponent } from './code-editor-demo/code-editor-demo.com
 const routes: Route[] = [
   {
     path: '',
-    component: CodeEditorDemoComponent,
-  },
+    component: CodeEditorDemoComponent
+  }
 ];
 
 @NgModule({
@@ -18,19 +18,18 @@ const routes: Route[] = [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes, {
-      initialNavigation: 'enabledBlocking',
+      initialNavigation: 'enabledBlocking'
     }),
-    // MaterialModule,
-
     CodeEditorModule.forRoot({
+      editorVersion: '0.44.0'
       // use local Monaco installation
-      baseUrl: 'assets/monaco',
+      // baseUrl: 'assets/monaco',
       // use local Typings Worker
-      typingsWorkerUrl: 'assets/workers/typings-worker.js',
+      // typingsWorkerUrl: 'assets/workers/typings-worker.js'
     }),
-    CodeEditorDemoComponent,
+    CodeEditorDemoComponent
   ],
   declarations: [AppComponent],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

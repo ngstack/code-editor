@@ -19,13 +19,11 @@ export interface TypingsInfo {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class CodeEditorService {
-  baseUrl = 'https://cdn.jsdelivr.net/npm/monaco-editor/min';
-
-  typingsWorkerUrl =
-    'https://cdn.jsdelivr.net/npm/@ngstack/code-editor/workers/typings-worker.js';
+  readonly baseUrl: string; // = 'https://cdn.jsdelivr.net/npm/monaco-editor/min';
+  readonly typingsWorkerUrl: string; // = 'https://cdn.jsdelivr.net/npm/@ngstack/code-editor/workers/typings-worker.js';
 
   typingsLoaded = new Subject<TypingsInfo>();
   loaded = new BehaviorSubject<{ monaco: any } | null>(null);
@@ -39,14 +37,12 @@ export class CodeEditorService {
     @Inject(EDITOR_SETTINGS)
     settings: CodeEditorSettings
   ) {
-    const defaults = {
-      baseUrl: this.baseUrl,
-      typingsWorkerUrl: this.typingsWorkerUrl,
-      ...settings,
-    };
+    const editorVersion = settings?.editorVersion || 'latest';
 
-    this.baseUrl = defaults.baseUrl;
-    this.typingsWorkerUrl = defaults.typingsWorkerUrl;
+    this.baseUrl =
+      settings?.baseUrl ||
+      `https://cdn.jsdelivr.net/npm/monaco-editor@${editorVersion}/min`;
+    this.typingsWorkerUrl = settings?.typingsWorkerUrl || ``;
   }
 
   private loadTypingsWorker(): Worker {
@@ -74,7 +70,7 @@ export class CodeEditorService {
       if (worker) {
         this.loadingTypings.next(true);
         worker.postMessage({
-          dependencies,
+          dependencies
         });
       }
     }
@@ -84,7 +80,7 @@ export class CodeEditorService {
     return new Promise((resolve) => {
       const onGotAmdLoader = () => {
         (<any>window).require.config({
-          paths: { vs: `${this.baseUrl}/vs` },
+          paths: { vs: `${this.baseUrl}/vs` }
         });
 
         if (this.baseUrl.startsWith('http')) {
@@ -100,7 +96,7 @@ export class CodeEditorService {
           window['MonacoEnvironment'] = {
             getWorkerUrl: function () {
               return proxy;
-            },
+            }
           };
         }
 

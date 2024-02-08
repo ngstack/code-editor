@@ -5,9 +5,9 @@ Code editor component for Angular applications.
 Based on the [Monaco](https://www.npmjs.com/package/monaco-editor) editor
 that powers [VS Code](https://github.com/Microsoft/vscode).
 
-## Live demos
-
-- [Angular 6](https://stackblitz.com/edit/ngstack-code-editor-ng6)
+<a href="https://www.buymeacoffee.com/denys" target="_blank">
+  <img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="51" width="217">
+</a>
 
 ## Installing
 
@@ -23,11 +23,21 @@ Import `CodeEditorModule` into your main application module:
 import { CodeEditorModule } from '@ngstack/code-editor';
 
 @NgModule({
+  imports: [CodeEditorModule.forRoot()]
+})
+export class AppModule {}
+```
+
+If you want to use a specific version of the Monaco editor, use `editorVersion` parameter.
+If not provided, the component is always going to use the `latest` version.
+
+```ts
+@NgModule({
   imports: [
-    ...,
-    CodeEditorModule.forRoot()
-  ],
-  ...
+    CodeEditorModule.forRoot({
+      editorVersion: '0.44.0'
+    })
+  ]
 })
 export class AppModule {}
 ```
@@ -35,12 +45,7 @@ export class AppModule {}
 Update template to use the `ngs-code-editor`:
 
 ```html
-<ngs-code-editor
-  [theme]="theme"
-  [codeModel]="model"
-  [options]="options"
-  (valueChanged)="onCodeChanged($event)">
-</ngs-code-editor>
+<ngs-code-editor [theme]="theme" [codeModel]="model" [options]="options" (valueChanged)="onCodeChanged($event)"></ngs-code-editor>
 ```
 
 Update component controller class and provide corresponding properties and events:
@@ -49,7 +54,7 @@ Update component controller class and provide corresponding properties and event
 export class AppComponent {
   theme = 'vs-dark';
 
-  codeModel: CodeModel = {
+  model: CodeModel = {
     language: 'json',
     uri: 'main.json',
     value: '{}'
@@ -95,7 +100,7 @@ export interface CodeModel {
 
 ### Editor Options
 
-For available options see [IEditorConstructionOptions](https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditorconstructionoptions.html) docs.
+For available options see [IEditorConstructionOptions](https://microsoft.github.io/monaco-editor/typedoc/interfaces/editor.IEditorConstructionOptions.html) docs.
 
 The following options are used by default when Editor Component gets created:
 
@@ -123,8 +128,7 @@ The editor is able to resolve typing libraries when set to the `Typescript` or `
 Use `dependencies` property to provide a list of libraries to resolve
 
 ```html
-<ngs-code-editor [codeModel]="model" ...>
-</ngs-code-editor>
+<ngs-code-editor [codeModel]="model" ...> </ngs-code-editor>
 ```
 
 And in the controller class:
@@ -162,8 +166,7 @@ You should have all the types resolved and auto-completion working.
 You can associate multiple schemas when working with JSON files.
 
 ```html
-<ngs-code-editor [codeModel]="model" ...>
-</ngs-code-editor>
+<ngs-code-editor [codeModel]="model" ...> </ngs-code-editor>
 ```
 
 Provide the required schemas like in the example below.
@@ -205,7 +208,7 @@ Install the `monaco-editor`:
 npm install monaco-editor
 ```
 
-Update the `.angular-cli.json` file and append the following asset rule:
+Update the `angular.json` file and append the following asset rule:
 
 ```json
 {
@@ -235,7 +238,7 @@ export class AppModule {}
 
 ### Typings Worker
 
-Update the `.angular-cli.json` file and append the following asset rule:
+Update the `angular.json` file and append the following asset rule:
 
 ```ts
 {
@@ -268,44 +271,3 @@ use `CodeEditorModule.forRoot()` in the main application,
 and `CodeEditorModule.forChild()` in all lazy-loaded feature modules.
 
 For more details please refer to [Lazy Loading Feature Modules](https://angular.io/guide/lazy-loading-ngmodules)
-
-## Enabling error details
-
-Append the following code to the `polyfills.ts` to enable error details in the tooltips:
-
-```ts
-// workaround for https://github.com/Microsoft/monaco-editor/issues/790
-
-Promise.all = function(values: any): Promise<any> {
-  let resolve: (v: any) => void;
-  let reject: (v: any) => void;
-  const promise = new this((res, rej) => {
-    resolve = res;
-    reject = rej;
-  });
-  let count = 0;
-  let index = 0;
-  const resolvedValues: any[] = [];
-  for (let value of values) {
-    if (!(value && value.then)) {
-      value = this.resolve(value);
-    }
-    value.then(
-      (idx => (val: any) => {
-        resolvedValues[idx] = val;
-        count--;
-        if (!count) {
-          resolve(resolvedValues);
-        }
-      })(index),
-      reject
-    );
-    count++;
-    index++;
-  }
-  if (!count) {
-    resolve(resolvedValues);
-  }
-  return promise;
-};
-```

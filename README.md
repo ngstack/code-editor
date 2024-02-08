@@ -23,11 +23,21 @@ Import `CodeEditorModule` into your main application module:
 import { CodeEditorModule } from '@ngstack/code-editor';
 
 @NgModule({
+  imports: [CodeEditorModule.forRoot()]
+})
+export class AppModule {}
+```
+
+If you want to use a specific version of the Monaco editor, use `editorVersion` parameter.
+If not provided, the component is always going to use the `latest` version.
+
+```ts
+@NgModule({
   imports: [
-    ...,
-    CodeEditorModule.forRoot()
-  ],
-  ...
+    CodeEditorModule.forRoot({
+      editorVersion: '0.44.0'
+    })
+  ]
 })
 export class AppModule {}
 ```
@@ -47,14 +57,14 @@ export class AppComponent {
   model: CodeModel = {
     language: 'json',
     uri: 'main.json',
-    value: '{}',
+    value: '{}'
   };
 
   options = {
     contextmenu: true,
     minimap: {
-      enabled: true,
-    },
+      enabled: true
+    }
   };
 
   onCodeChanged(value) {
@@ -129,7 +139,7 @@ export class MyEditorComponent {
     language: 'typescript',
     uri: 'main.ts',
     value: '',
-    dependencies: ['@types/node', '@ngstack/translate', '@ngstack/code-editor'],
+    dependencies: ['@types/node', '@ngstack/translate', '@ngstack/code-editor']
   };
 }
 ```
@@ -174,12 +184,12 @@ export class MyEditorComponent {
           type: 'object',
           properties: {
             type: {
-              enum: ['button', 'textbox'],
-            },
-          },
-        },
-      },
-    ],
+              enum: ['button', 'textbox']
+            }
+          }
+        }
+      }
+    ]
   };
 }
 ```
