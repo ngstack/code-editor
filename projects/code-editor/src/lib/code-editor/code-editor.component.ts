@@ -11,15 +11,14 @@ import {
   Output,
   EventEmitter,
   SimpleChanges,
-  HostListener,
+  HostListener
 } from '@angular/core';
 import { CodeEditorService } from '../services/code-editor.service';
 import { TypescriptDefaultsService } from '../services/typescript-defaults.service';
 import { JavascriptDefaultsService } from '../services/javascript-defaults.service';
 import { JsonDefaultsService } from '../services/json-defaults.service';
 import { CodeModel } from '../models/code.model';
-
-declare const monaco: any;
+import * as monaco from 'monaco-editor';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -29,21 +28,21 @@ declare const monaco: any;
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   // eslint-disable-next-line
-  host: { class: 'ngs-code-editor' },
+  host: { class: 'ngs-code-editor' }
 })
 export class CodeEditorComponent
   implements OnChanges, OnDestroy, AfterViewInit
 {
-  private _editor: any;
-  private _model: any;
+  private _editor: monaco.editor.IStandaloneCodeEditor;
+  private _model: monaco.editor.ITextModel;
   // private _value = '';
 
   private defaultOptions = {
     lineNumbers: true,
     contextmenu: false,
     minimap: {
-      enabled: false,
-    },
+      enabled: false
+    }
   };
 
   @ViewChild('editor', { static: true })
@@ -82,7 +81,7 @@ export class CodeEditorComponent
    * @memberof CodeEditorComponent
    */
   @Input()
-  options = {};
+  options: monaco.editor.IStandaloneEditorConstructionOptions = {};
 
   /**
    * Toggle readonly state of the editor.
@@ -92,9 +91,22 @@ export class CodeEditorComponent
   @Input()
   readOnly = false;
 
+  /**
+   * An event emitted when the text content of the model have changed.
+   */
   @Output()
   valueChanged = new EventEmitter<string>();
 
+  /**
+   * An event emitted when the contents of the underlying editor model have changed.
+   */
+  @Output()
+  modelContentChanged =
+    new EventEmitter<monaco.editor.IModelContentChangedEvent>();
+
+  /**
+   * Raised when editor finished loading all its components.
+   */
   @Output()
   loaded = new EventEmitter();
 
@@ -125,7 +137,7 @@ export class CodeEditorComponent
     if (changes.readOnly && !changes.readOnly.firstChange) {
       if (this._editor) {
         this._editor.updateOptions({
-          readOnly: changes.readOnly.currentValue,
+          readOnly: changes.readOnly.currentValue
         });
       }
     }
@@ -153,7 +165,7 @@ export class CodeEditorComponent
       value: '',
       language: 'text',
       uri: `code-${Date.now()}`,
-      ...this.codeModel,
+      ...this.codeModel
     };
 
     this._model = monaco.editor.createModel(
@@ -165,18 +177,22 @@ export class CodeEditorComponent
     const options = Object.assign({}, this.defaultOptions, this.options, {
       readOnly: this.readOnly,
       theme: this.theme,
-      model: this._model,
+      model: this._model
     });
 
     this._editor = monaco.editor.create(domElement, options);
 
-    this._model.onDidChangeContent((/*e*/) => {
-      const newValue = this._model.getValue();
-      if (this.codeModel) {
-        this.codeModel.value = newValue;
+    this._model.onDidChangeContent(
+      (e: monaco.editor.IModelContentChangedEvent) => {
+        this.modelContentChanged.emit(e);
+
+        const newValue = this._model.getValue();
+        if (this.codeModel) {
+          this.codeModel.value = newValue;
+        }
+        this.valueChanged.emit(newValue);
       }
-      this.valueChanged.emit(newValue);
-    });
+    );
 
     this.setupDependencies(this.codeModel);
   }

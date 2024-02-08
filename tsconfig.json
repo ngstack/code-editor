@@ -18,8 +18,8 @@
       "dom"
     ],
     "paths": {
-      "@ngstack/*": [
-        "dist/@ngstack/*"
+      "@ngstack/code-editor": [
+        "projects/code-editor/src/public_api.ts"
       ]
     },
     "useDefineForClassFields": false

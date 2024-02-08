@@ -1,7 +1,7 @@
 // This worker resolves typings (.d.ts files) for the given list of dependencies.
 
 self.importScripts([
-  'https://cdnjs.cloudflare.com/ajax/libs/typescript/4.9.5/typescript.min.js'
+  'https://cdnjs.cloudflare.com/ajax/libs/typescript/5.3.3/typescript.min.js'
 ]);
 
 const PACKAGES_SOURCE = 'https://unpkg.com';
@@ -9,13 +9,23 @@ const PACKAGES_SOURCE = 'https://unpkg.com';
 const resolved = {};
 const downloaded = {};
 
-const loadContent = async url => {
+function normalizeUrl(url) {
+  if (url && url.startsWith('node:')) {
+    return url.replace('node:', 'https://unpkg.com/@types/node/');
+  }
+
+  return url;
+}
+
+const loadContent = async (url) => {
   try {
+    url = normalizeUrl(url);
     const existing = downloaded[url];
     if (existing) {
       return existing;
     }
 
+    console.info('loading', url);
     const response = await fetch(url);
 
     if (response.status >= 200 && response.status < 300) {
@@ -30,27 +40,31 @@ const loadContent = async url => {
   return null;
 };
 
-const getIndex = async lib => {
+const getIndex = async (lib) => {
   let packageUrl = `${PACKAGES_SOURCE}/${lib}/package.json`;
   let content = await loadContent(packageUrl);
 
   if (content) {
     const json = JSON.parse(content);
     if (json.typings) {
-      return new URL(json.typings, packageUrl).href;
+      return getTypingsUrl(json.typings, packageUrl);
     }
 
     packageUrl = `${PACKAGES_SOURCE}/${lib}/index.d.ts`;
     content = await loadContent(packageUrl);
     if (content) {
-      return new URL(packageUrl).href;
+      return getTypingsUrl(packageUrl);
     }
   }
 
   return null;
 };
 
-const findReferences = sourceFile => {
+function getTypingsUrl(url, base) {
+  return new URL(normalizeUrl(url), normalizeUrl(base)).href;
+}
+
+const findReferences = (sourceFile) => {
   const result = [];
 
   /**
@@ -58,7 +72,7 @@ const findReferences = sourceFile => {
    * /// <reference path="./inspector.d.ts" />
    */
   if (sourceFile.referencedFiles.length > 0) {
-    result.push(...sourceFile.referencedFiles.map(ref => ref.fileName));
+    result.push(...sourceFile.referencedFiles.map((ref) => ref.fileName));
   }
 
   function scanNode(node) {
@@ -103,11 +117,17 @@ const resolveLibs = async (url, cache = {}) => {
 
     for (const ref of references) {
       const fileName = ref.endsWith('.d.ts') ? ref : `${ref}.d.ts`;
-      const fileUrl = new URL(fileName, url).href;
-      const refLibs = await resolveLibs(fileUrl, cache);
 
-      if (refLibs && refLibs.length > 0) {
-        result.push(...refLibs);
+      try {
+        const fileUrl = getTypingsUrl(fileName, url);
+        const refLibs = await resolveLibs(fileUrl, cache);
+
+        if (refLibs && refLibs.length > 0) {
+          result.push(...refLibs);
+        }
+      } catch (err) {
+        console.log('Oops');
+        console.error(err);
       }
     }
   }
@@ -136,21 +156,21 @@ const getPackageTypings = async (lib, entryPoints) => {
   return [];
 };
 
-self.addEventListener('message', async e => {
+self.addEventListener('message', async (e) => {
   const { dependencies } = e.data;
 
   if (dependencies && dependencies.length > 0) {
     const entryPoints = {};
 
     const result = await Promise.all(
-      dependencies.map(libName => {
+      dependencies.map((libName) => {
         return getPackageTypings(libName, entryPoints);
       })
     );
 
     const files = result
       .reduce((prev, curr) => prev.concat(curr), [])
-      .map(t => {
+      .map((t) => {
         return {
           ...t,
           content: downloaded[t.url]

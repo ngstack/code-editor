@@ -22,8 +22,8 @@ export interface TypingsInfo {
   providedIn: 'root'
 })
 export class CodeEditorService {
-  readonly baseUrl: string; // = 'https://cdn.jsdelivr.net/npm/monaco-editor/min';
-  readonly typingsWorkerUrl: string; // = 'https://cdn.jsdelivr.net/npm/@ngstack/code-editor/workers/typings-worker.js';
+  readonly baseUrl: string;
+  readonly typingsWorkerUrl: string;
 
   typingsLoaded = new Subject<TypingsInfo>();
   loaded = new BehaviorSubject<{ monaco: any } | null>(null);

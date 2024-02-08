@@ -37,7 +37,7 @@
               },
               {
                 "glob": "**/*.js",
-                "input": "dist/@ngstack/code-editor/workers",
+                "input": "projects/code-editor/src/lib/workers",
                 "output": "./assets/workers"
               }
             ],

@@ -21,11 +21,11 @@ const routes: Route[] = [
       initialNavigation: 'enabledBlocking'
     }),
     CodeEditorModule.forRoot({
-      editorVersion: '0.44.0'
+      editorVersion: '0.46.0',
       // use local Monaco installation
       // baseUrl: 'assets/monaco',
       // use local Typings Worker
-      // typingsWorkerUrl: 'assets/workers/typings-worker.js'
+      typingsWorkerUrl: 'assets/workers/typings-worker.js'
     }),
     CodeEditorDemoComponent
   ],

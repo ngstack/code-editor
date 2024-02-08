@@ -118,10 +118,11 @@ The following options are used by default when Editor Component gets created:
 
 ## Output Events
 
-| Name         | Argument Type | Description                                             |
-| ------------ | ------------- | ------------------------------------------------------- |
-| loaded       |               | Raised when editor finished loading all its components. |
-| valueChanged | string        | Raised after editor value gets changed.                 |
+| Name                | Argument Type               | Description                                                                    |
+| ------------------- | --------------------------- | ------------------------------------------------------------------------------ |
+| loaded              |                             | Raised when editor finished loading all its components.                        |
+| valueChanged        | string                      | An event emitted when the text content of the model have changed.              |
+| modelContentChanged | `IModelContentChangedEvent` | An event emitted when the contents of the underlying editor model have changed |
 
 ## Typings
 
