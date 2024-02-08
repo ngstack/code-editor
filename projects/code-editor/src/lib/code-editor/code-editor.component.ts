@@ -37,8 +37,8 @@ export class CodeEditorComponent
   private _model: monaco.editor.ITextModel;
   // private _value = '';
 
-  private defaultOptions = {
-    lineNumbers: true,
+  private defaultOptions: monaco.editor.IStandaloneEditorConstructionOptions = {
+    lineNumbers: 'on',
     contextmenu: false,
     minimap: {
       enabled: false
