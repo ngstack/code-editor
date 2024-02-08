@@ -31,6 +31,8 @@ export class AppModule {}
 If you want to use a specific version of the Monaco editor, use `editorVersion` parameter.
 If not provided, the component is always going to use the `latest` version.
 
+> For a full list of Monaco versions and changes, please refer to the official [CHANGELOG.md](https://github.com/microsoft/monaco-editor/blob/main/CHANGELOG.md) file
+
 ```ts
 @NgModule({
   imports: [
