@@ -22,7 +22,7 @@ jobs:
         npm ci && \
         npm run lint && \
         npm run spellcheck && \
-        # npm run test:ci && \
+        npm run test:ci && \
         npm run build:prod
       env:
         CI: true

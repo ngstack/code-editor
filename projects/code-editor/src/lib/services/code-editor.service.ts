@@ -25,7 +25,7 @@ export class CodeEditorService {
   readonly typingsWorkerUrl: string;
 
   typingsLoaded = new Subject<TypingsInfo>();
-  loaded = new BehaviorSubject<{ monaco: any } | null>(null);
+  loaded = new BehaviorSubject<{ monaco: any } | null>({ monaco: null });
 
   loadingTypings = new BehaviorSubject<boolean>(false);
 
