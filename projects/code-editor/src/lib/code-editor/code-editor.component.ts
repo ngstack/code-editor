@@ -48,6 +48,17 @@ export class CodeEditorComponent
     }
   };
 
+  /**
+   * The instance of the editor.
+   */
+  get editor(): editor.IEditor {
+    return this._editor;
+  }
+
+  protected set editor(value: editor.IEditor) {
+    this._editor = value;
+  }
+
   @ViewChild('editor', { static: true })
   editorContent: ElementRef<HTMLDivElement>;
 
@@ -118,9 +129,9 @@ export class CodeEditorComponent
   protected jsonDefaults = inject(JsonDefaultsService);
 
   ngOnDestroy() {
-    if (this._editor) {
-      this._editor.dispose();
-      this._editor = null;
+    if (this.editor) {
+      this.editor.dispose();
+      this.editor = null;
     }
 
     if (this._model) {
@@ -135,8 +146,8 @@ export class CodeEditorComponent
     }
 
     if (changes.readOnly && !changes.readOnly.firstChange) {
-      if (this._editor) {
-        this._editor.updateOptions({
+      if (this.editor) {
+        this.editor.updateOptions({
           readOnly: changes.readOnly.currentValue
         });
       }
@@ -149,8 +160,8 @@ export class CodeEditorComponent
 
   @HostListener('window:resize')
   onResize() {
-    if (this._editor) {
-      this._editor.layout();
+    if (this.editor) {
+      this.editor.layout();
     }
   }
 
@@ -180,7 +191,7 @@ export class CodeEditorComponent
       model: this._model
     });
 
-    this._editor = monaco.editor.create(domElement, options);
+    this.editor = monaco.editor.create(domElement, options);
 
     this._model.onDidChangeContent((e: editor.IModelContentChangedEvent) => {
       this.modelContentChanged.emit(e);
