@@ -21,6 +21,11 @@ import { JsonDefaultsService } from '../services/json-defaults.service';
 import { CodeModel } from '../models/code.model';
 import { editor } from 'monaco-editor';
 
+export interface CodeModelChangedEvent {
+  sender: CodeEditorComponent;
+  value: CodeModel;
+}
+
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'ngs-code-editor',
@@ -110,6 +115,12 @@ export class CodeEditorComponent
   valueChanged = new EventEmitter<string>();
 
   /**
+   * An event emitted when the code model value is changed.
+   */
+  @Output()
+  codeModelChanged = new EventEmitter<CodeModelChangedEvent>();
+
+  /**
    * An event emitted when the contents of the underlying editor model have changed.
    */
   @Output()
@@ -119,7 +130,7 @@ export class CodeEditorComponent
    * Raised when editor finished loading all its components.
    */
   @Output()
-  loaded = new EventEmitter();
+  loaded = new EventEmitter<CodeEditorComponent>();
 
   protected editorService = inject(CodeEditorService);
   protected typescriptDefaults = inject(TypescriptDefaultsService);
@@ -165,7 +176,7 @@ export class CodeEditorComponent
 
   async ngAfterViewInit() {
     this.setupEditor();
-    this.loaded.emit();
+    this.loaded.emit(this);
   }
 
   private setupEditor() {
@@ -202,6 +213,7 @@ export class CodeEditorComponent
     });
 
     this.setupDependencies(this.codeModel);
+    this.codeModelChanged.emit({ sender: this, value: this.codeModel });
   }
 
   runEditorAction(id: string, args?: unknown) {
@@ -258,6 +270,7 @@ export class CodeEditorComponent
       this.setEditorValue(model.value);
       this.editorService.setModelLanguage(this._model, model.language);
       this.setupDependencies(model);
+      this.codeModelChanged.emit({ sender: this, value: model });
     }
   }
 }

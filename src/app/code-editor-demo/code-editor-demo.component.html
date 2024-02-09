@@ -98,7 +98,8 @@
         [theme]="activeTheme"
         [options]="options"
         (valueChanged)="onCodeChanged($event)"
-        (loaded)="onEditorLoaded()"
+        (loaded)="onEditorLoaded($event)"
+        (codeModelChanged)="onCodeModelChanged($event)"
       >
       </ngs-code-editor>
     </ng-container>

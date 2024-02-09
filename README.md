@@ -123,6 +123,7 @@ The following options are used by default when Editor Component gets created:
 | loaded              |                             | Raised when editor finished loading all its components.                        |
 | valueChanged        | string                      | An event emitted when the text content of the model have changed.              |
 | modelContentChanged | `IModelContentChangedEvent` | An event emitted when the contents of the underlying editor model have changed |
+| codeModelChanged    | `CodeModelChangedEvent`     | An event emitted when the code model value is changed.                         |
 
 ## Component API
 
@@ -249,6 +250,22 @@ Other components can now have access to the editor instance:
 <button mat-icon-button title="Format code" (click)="codeEditor?.formatDocument()">
   <mat-icon>format_align_left</mat-icon>
 </button>
+```
+
+### Example: auto-formatting on load
+
+```html
+<ngs-code-editor [codeModel]="selectedModel" [options]="options" (codeModelChanged)="onCodeModelChanged($event)"></ngs-code-editor>
+```
+
+```ts
+import { CodeModelChangedEvent } from '@ngstack/code-editor';
+
+onCodeModelChanged(event: CodeModelChangedEvent) {
+  setTimeout(() => {
+    event.sender.formatDocument();
+  }, 100);
+}
 ```
 
 ## Offline Setup

@@ -11,7 +11,8 @@ import {
   CodeEditorComponent,
   CodeEditorModule,
   CodeEditorService,
-  CodeModel
+  CodeModel,
+  CodeModelChangedEvent
 } from '@ngstack/code-editor';
 import { Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -129,7 +130,15 @@ export class CodeEditorDemoComponent implements OnInit {
     */
   }
 
-  onEditorLoaded() {
-    console.log('loaded');
+  onEditorLoaded(editor: CodeEditorComponent) {
+    console.log('loaded', editor);
+  }
+
+  onCodeModelChanged(event: CodeModelChangedEvent) {
+    console.log('code model changed', event);
+
+    setTimeout(() => {
+      event.sender.formatDocument();
+    }, 100);
   }
 }
