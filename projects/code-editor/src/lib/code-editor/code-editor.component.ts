@@ -18,7 +18,9 @@ import { TypescriptDefaultsService } from '../services/typescript-defaults.servi
 import { JavascriptDefaultsService } from '../services/javascript-defaults.service';
 import { JsonDefaultsService } from '../services/json-defaults.service';
 import { CodeModel } from '../models/code.model';
-import * as monaco from 'monaco-editor';
+import { editor } from 'monaco-editor';
+
+declare const monaco: any;
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -33,11 +35,11 @@ import * as monaco from 'monaco-editor';
 export class CodeEditorComponent
   implements OnChanges, OnDestroy, AfterViewInit
 {
-  private _editor: monaco.editor.IStandaloneCodeEditor;
-  private _model: monaco.editor.ITextModel;
+  private _editor: editor.IEditor;
+  private _model: editor.ITextModel;
   // private _value = '';
 
-  private defaultOptions: monaco.editor.IStandaloneEditorConstructionOptions = {
+  private defaultOptions: editor.IStandaloneEditorConstructionOptions = {
     lineNumbers: 'on',
     contextmenu: false,
     minimap: {
@@ -81,7 +83,7 @@ export class CodeEditorComponent
    * @memberof CodeEditorComponent
    */
   @Input()
-  options: monaco.editor.IStandaloneEditorConstructionOptions = {};
+  options = {};
 
   /**
    * Toggle readonly state of the editor.
@@ -101,8 +103,7 @@ export class CodeEditorComponent
    * An event emitted when the contents of the underlying editor model have changed.
    */
   @Output()
-  modelContentChanged =
-    new EventEmitter<monaco.editor.IModelContentChangedEvent>();
+  modelContentChanged = new EventEmitter<editor.IModelContentChangedEvent>();
 
   /**
    * Raised when editor finished loading all its components.
@@ -182,17 +183,15 @@ export class CodeEditorComponent
 
     this._editor = monaco.editor.create(domElement, options);
 
-    this._model.onDidChangeContent(
-      (e: monaco.editor.IModelContentChangedEvent) => {
-        this.modelContentChanged.emit(e);
+    this._model.onDidChangeContent((e: editor.IModelContentChangedEvent) => {
+      this.modelContentChanged.emit(e);
 
-        const newValue = this._model.getValue();
-        if (this.codeModel) {
-          this.codeModel.value = newValue;
-        }
-        this.valueChanged.emit(newValue);
+      const newValue = this._model.getValue();
+      if (this.codeModel) {
+        this.codeModel.value = newValue;
       }
-    );
+      this.valueChanged.emit(newValue);
+    });
 
     this.setupDependencies(this.codeModel);
   }
