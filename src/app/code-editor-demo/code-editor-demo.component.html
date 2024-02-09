@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <button mat-icon-button [matMenuTriggerFor]="mnuTheme">
+  <button mat-icon-button [matMenuTriggerFor]="mnuTheme" title="Change theme">
     <mat-icon>format_color_fill</mat-icon>
   </button>
 
@@ -12,6 +12,10 @@
       {{ theme.name }}
     </button>
   </mat-menu>
+
+  <button mat-icon-button title="Format code" (click)="codeEditor?.formatDocument()">
+    <mat-icon>format_align_left</mat-icon>
+  </button>
 </mat-toolbar>
 
 <div class="page-layout">

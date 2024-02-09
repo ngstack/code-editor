@@ -34,7 +34,7 @@ import { editor } from 'monaco-editor';
 export class CodeEditorComponent
   implements OnChanges, OnDestroy, AfterViewInit
 {
-  private _editor: editor.IEditor;
+  private _editor: editor.ICodeEditor;
   private _model: editor.ITextModel;
   // private _value = '';
 
@@ -49,11 +49,11 @@ export class CodeEditorComponent
   /**
    * The instance of the editor.
    */
-  get editor(): editor.IEditor {
+  get editor(): editor.ICodeEditor {
     return this._editor;
   }
 
-  protected set editor(value: editor.IEditor) {
+  protected set editor(value: editor.ICodeEditor) {
     this._editor = value;
   }
 
@@ -202,6 +202,14 @@ export class CodeEditorComponent
     });
 
     this.setupDependencies(this.codeModel);
+  }
+
+  runEditorAction(id: string, args?: unknown) {
+    this.editor.getAction(id)?.run(args);
+  }
+
+  formatDocument() {
+    this.runEditorAction('editor.action.formatDocument');
   }
 
   private setupDependencies(model: CodeModel) {

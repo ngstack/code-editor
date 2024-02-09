@@ -124,6 +124,14 @@ The following options are used by default when Editor Component gets created:
 | valueChanged        | string                      | An event emitted when the text content of the model have changed.              |
 | modelContentChanged | `IModelContentChangedEvent` | An event emitted when the contents of the underlying editor model have changed |
 
+## Component API
+
+| Name                | Description                                                                                                                                         |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| editor              | returns the instance of the underlying Monaco [ICodeEditor](https://microsoft.github.io/monaco-editor/docs.html#interfaces/editor.ICodeEditor.html) |
+| runAction(id, args) | runs the editor actions, for example `editor.action.formatDocument`                                                                                 |
+| formatDocument()    | shortcut function to format the document                                                                                                            |
+
 ## Editor Service
 
 The component comes with a separate `CodeEditorService` service that provides additional APIs for the underlying `monaco` editor:
@@ -209,6 +217,39 @@ export class MyEditorComponent {
 ```
 
 The schemas get automatically installed and associated with the corresponding file.
+
+## Accessing Code Editor Instance
+
+You can access the Code Editor component instance API from other components when using with the `@ViewChild`:
+
+```ts
+  private _codeEditor: CodeEditorComponent;
+
+  @ViewChild(CodeEditorComponent, { static: false })
+  set codeEditor(value: CodeEditorComponent) {
+    this._codeEditor = value;
+  }
+
+  get codeEditor(): CodeEditorComponent {
+    return this._codeEditor;
+  }
+```
+
+The code above allows you to use the code editor within the `*ngIf`, for example:
+
+```html
+<ng-container *ngIf="selectedModel">
+  <ngs-code-editor [codeModel]="selectedModel"></ngs-code-editor>
+</ng-container>
+```
+
+Other components can now have access to the editor instance:
+
+```html
+<button mat-icon-button title="Format code" (click)="codeEditor?.formatDocument()">
+  <mat-icon>format_align_left</mat-icon>
+</button>
+```
 
 ## Offline Setup
 

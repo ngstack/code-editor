@@ -138,7 +138,7 @@ export class CodeEditorService {
   createEditor(
     containerElement: HTMLElement,
     options?: editor.IEditorConstructionOptions
-  ): editor.IEditor {
+  ): editor.ICodeEditor {
     return this.monaco.editor.create(containerElement, options);
   }
 

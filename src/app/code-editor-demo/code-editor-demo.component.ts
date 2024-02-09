@@ -1,7 +1,6 @@
 import { NestedTreeControl } from '@angular/cdk/tree';
 import {
   Component,
-  ElementRef,
   HostBinding,
   OnInit,
   ViewChild,
@@ -9,6 +8,7 @@ import {
 } from '@angular/core';
 import { MatTreeModule, MatTreeNestedDataSource } from '@angular/material/tree';
 import {
+  CodeEditorComponent,
   CodeEditorModule,
   CodeEditorService,
   CodeModel
@@ -61,8 +61,16 @@ export class CodeEditorDemoComponent implements OnInit {
   isLoading = false;
   isLoading$: Observable<boolean>;
 
-  @ViewChild('file')
-  fileInput: ElementRef;
+  private _codeEditor: CodeEditorComponent;
+
+  @ViewChild(CodeEditorComponent, { static: false })
+  set codeEditor(value: CodeEditorComponent) {
+    this._codeEditor = value;
+  }
+
+  get codeEditor(): CodeEditorComponent {
+    return this._codeEditor;
+  }
 
   @HostBinding('class')
   class = 'app-code-editor-demo';
