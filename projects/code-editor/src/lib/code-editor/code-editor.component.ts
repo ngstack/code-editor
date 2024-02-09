@@ -11,7 +11,8 @@ import {
   Output,
   EventEmitter,
   SimpleChanges,
-  HostListener
+  HostListener,
+  inject
 } from '@angular/core';
 import { CodeEditorService } from '../services/code-editor.service';
 import { TypescriptDefaultsService } from '../services/typescript-defaults.service';
@@ -78,12 +79,12 @@ export class CodeEditorComponent
   /**
    * Editor options.
    *
-   * See https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.ieditorconstructionoptions.html for more details.
+   * See https://microsoft.github.io/monaco-editor/docs.html#interfaces/editor.IStandaloneEditorConstructionOptions.html for more details.
    *
    * @memberof CodeEditorComponent
    */
   @Input()
-  options = {};
+  options: editor.IStandaloneEditorConstructionOptions = {};
 
   /**
    * Toggle readonly state of the editor.
@@ -111,12 +112,10 @@ export class CodeEditorComponent
   @Output()
   loaded = new EventEmitter();
 
-  constructor(
-    protected editorService: CodeEditorService,
-    protected typescriptDefaults: TypescriptDefaultsService,
-    protected javascriptDefaults: JavascriptDefaultsService,
-    protected jsonDefaults: JsonDefaultsService
-  ) {}
+  protected editorService = inject(CodeEditorService);
+  protected typescriptDefaults = inject(TypescriptDefaultsService);
+  protected javascriptDefaults = inject(JavascriptDefaultsService);
+  protected jsonDefaults = inject(JsonDefaultsService);
 
   ngOnDestroy() {
     if (this._editor) {

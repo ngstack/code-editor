@@ -5,13 +5,13 @@ import {
   HostBinding,
   OnInit,
   ViewChild,
-  ViewEncapsulation,
+  ViewEncapsulation
 } from '@angular/core';
 import { MatTreeModule, MatTreeNestedDataSource } from '@angular/material/tree';
 import {
   CodeEditorModule,
   CodeEditorService,
-  CodeModel,
+  CodeModel
 } from '@ngstack/code-editor';
 import { Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -23,6 +23,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
+import { editor } from 'monaco-editor';
 
 @Component({
   standalone: true,
@@ -36,13 +37,13 @@ import { MatButtonModule } from '@angular/material/button';
     MatIconModule,
     MatProgressBarModule,
     MatTreeModule,
-    CodeEditorModule,
+    CodeEditorModule
   ],
   selector: 'app-code-editor-demo',
   templateUrl: './code-editor-demo.component.html',
   styleUrls: ['./code-editor-demo.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  providers: [FileDatabase],
+  providers: [FileDatabase]
 })
 export class CodeEditorDemoComponent implements OnInit {
   nestedTreeControl: NestedTreeControl<FileNode>;
@@ -51,7 +52,7 @@ export class CodeEditorDemoComponent implements OnInit {
   themes = [
     { name: 'Visual Studio', value: 'vs' },
     { name: 'Visual Studio Dark', value: 'vs-dark' },
-    { name: 'High Contrast Dark', value: 'hc-black' },
+    { name: 'High Contrast Dark', value: 'hc-black' }
   ];
 
   selectedModel: CodeModel = null;
@@ -66,11 +67,11 @@ export class CodeEditorDemoComponent implements OnInit {
   @HostBinding('class')
   class = 'app-code-editor-demo';
 
-  options = {
+  options: editor.IStandaloneEditorConstructionOptions = {
     contextmenu: true,
     minimap: {
-      enabled: false,
-    },
+      enabled: false
+    }
   };
 
   constructor(database: FileDatabase, editorService: CodeEditorService) {
