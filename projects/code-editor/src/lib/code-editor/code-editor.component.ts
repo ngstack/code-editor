@@ -21,8 +21,6 @@ import { JsonDefaultsService } from '../services/json-defaults.service';
 import { CodeModel } from '../models/code.model';
 import { editor } from 'monaco-editor';
 
-declare const monaco: any;
-
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'ngs-code-editor',
@@ -154,7 +152,7 @@ export class CodeEditorComponent
     }
 
     if (changes.theme && !changes.theme.firstChange) {
-      monaco.editor.setTheme(changes.theme.currentValue);
+      this.editorService.setTheme(changes.theme.currentValue);
     }
   }
 
@@ -179,10 +177,10 @@ export class CodeEditorComponent
       ...this.codeModel
     };
 
-    this._model = monaco.editor.createModel(
+    this._model = this.editorService.createModel(
       settings.value,
       settings.language,
-      monaco.Uri.file(settings.uri)
+      settings.uri
     );
 
     const options = Object.assign({}, this.defaultOptions, this.options, {
@@ -191,7 +189,7 @@ export class CodeEditorComponent
       model: this._model
     });
 
-    this.editor = monaco.editor.create(domElement, options);
+    this.editor = this.editorService.createEditor(domElement, options);
 
     this._model.onDidChangeContent((e: editor.IModelContentChangedEvent) => {
       this.modelContentChanged.emit(e);
@@ -250,9 +248,7 @@ export class CodeEditorComponent
   private updateModel(model: CodeModel) {
     if (model) {
       this.setEditorValue(model.value);
-      if (this._model && typeof monaco !== undefined) {
-        monaco.editor.setModelLanguage(this._model, model.language);
-      }
+      this.editorService.setModelLanguage(this._model, model.language);
       this.setupDependencies(model);
     }
   }

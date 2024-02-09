@@ -1,8 +1,7 @@
 import { Injectable, InjectionToken, Optional, Inject } from '@angular/core';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { CodeEditorSettings } from '../editor-settings';
-
-declare const monaco: any;
+import { editor } from 'monaco-editor';
 
 export const EDITOR_SETTINGS = new InjectionToken<CodeEditorSettings>(
   'EDITOR_SETTINGS'
@@ -31,6 +30,15 @@ export class CodeEditorService {
   loadingTypings = new BehaviorSubject<boolean>(false);
 
   private typingsWorker: Worker;
+
+  private _monaco: any;
+
+  /**
+   * Returns the global `monaco` instance
+   */
+  get monaco(): any {
+    return this._monaco;
+  }
 
   constructor(
     @Optional()
@@ -101,7 +109,8 @@ export class CodeEditorService {
         }
 
         (<any>window).require(['vs/editor/editor.main'], () => {
-          this.loaded.next({ monaco });
+          this._monaco = window['monaco'];
+          this.loaded.next({ monaco: this._monaco });
           resolve();
         });
       };
@@ -116,5 +125,41 @@ export class CodeEditorService {
         onGotAmdLoader();
       }
     });
+  }
+
+  /**
+   * Switches to a theme.
+   * @param themeName name of the theme
+   */
+  setTheme(themeName: string) {
+    this.monaco.editor.setTheme(themeName);
+  }
+
+  createEditor(
+    containerElement: HTMLElement,
+    options?: editor.IEditorConstructionOptions
+  ): editor.IEditor {
+    return this.monaco.editor.create(containerElement, options);
+  }
+
+  createModel(
+    value: string,
+    language?: string,
+    uri?: string
+  ): editor.ITextModel {
+    return this.monaco.editor.createModel(
+      value,
+      language,
+      this.monaco.Uri.file(uri)
+    );
+  }
+
+  setModelLanguage(
+    model: editor.ITextModel,
+    mimeTypeOrLanguageId: string
+  ): void {
+    if (this.monaco && model) {
+      this.monaco.editor.setModelLanguage(model, mimeTypeOrLanguageId);
+    }
   }
 }

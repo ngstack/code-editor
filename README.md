@@ -124,6 +124,17 @@ The following options are used by default when Editor Component gets created:
 | valueChanged        | string                      | An event emitted when the text content of the model have changed.              |
 | modelContentChanged | `IModelContentChangedEvent` | An event emitted when the contents of the underlying editor model have changed |
 
+## Editor Service
+
+The component comes with a separate `CodeEditorService` service that provides additional APIs for the underlying `monaco` editor:
+
+| Name                | Description                                           |
+| ------------------- | ----------------------------------------------------- |
+| monaco              | get the global monaco instance                        |
+| typingsLoaded       | An event emitted when code typings are loaded         |
+| loaded              | An event emitted when the `monaco` instance is loaded |
+| setTheme(themeName) | Switches to a theme                                   |
+
 ## Typings
 
 The editor is able to resolve typing libraries when set to the `Typescript` or `Javascript` language.
@@ -224,17 +235,14 @@ Update the `angular.json` file and append the following asset rule:
 Update the main application module and setup the service to use the custom `baseUrl` when application starts:
 
 ```ts
-import { CodeEditorModule, CodeEditorService } from '@ngstack/code-editor';
+import { CodeEditorModule } from '@ngstack/code-editor';
 
 @NgModule({
-  ...,
   imports: [
-    ...,
     CodeEditorModule.forRoot({
       baseUrl: 'assets/monaco'
     })
-  ],
-  ...
+  ]
 })
 export class AppModule {}
 ```
@@ -255,14 +263,11 @@ Then update the `CodeEditorService` configuration at the application startup:
 
 ```ts
 @NgModule({
-  ...,
   imports: [
-    ...,
     CodeEditorModule.forRoot({
       typingsWorkerUrl: 'assets/workers/typings-worker.js'
     })
-  ],
-  ...
+  ]
 })
 export class AppModule {}
 ```
