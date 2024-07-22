@@ -1,7 +1,7 @@
 {
   "name": "@ngstack/code-editor",
   "description": "Code editor component for Angular applications.",
-  "version": "7.3.0",
+  "version": "8.0.0",
   "license": "MIT",
   "author": {
     "name": "Denys Vuika",
