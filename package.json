@@ -29,7 +29,7 @@
     "monaco-editor": "^0.50.0",
     "rxjs": "^7.8.0",
     "tslib": "^2.5.0",
-    "zone.js": "~0.14.4"
+    "zone.js": "~0.14.8"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.1.1",
@@ -46,11 +46,11 @@
     "@types/node": "^20.12.7",
     "@typescript-eslint/eslint-plugin": "^7.17.0",
     "@typescript-eslint/parser": "^7.17.0",
-    "cspell": "^8.3.2",
+    "cspell": "^8.11.0",
     "eslint": "^8.57.0",
-    "jasmine-core": "~5.1.2",
+    "jasmine-core": "~5.2.0",
     "jasmine-spec-reporter": "~7.0.0",
-    "karma": "~6.4.2",
+    "karma": "~6.4.3",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~5.1.0",
