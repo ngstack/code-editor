@@ -15,16 +15,9 @@
   flex: 1 1 1e-9px;
 }
 
-.page-layout-sidebar {
-  flex: 1 1 100%;
-  box-sizing: border-box;
-  max-width: 20%;
-}
-
 .page-layout-content {
   flex: 1 1 100%;
   box-sizing: border-box;
-  max-width: 80%;
 }
 
 .ngs-code-editor {
