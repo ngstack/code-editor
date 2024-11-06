@@ -9,7 +9,6 @@
     "src/main.ts"
   ],
   "include": [
-    "src/**/*.d.ts",
-    "src/environments/*.ts"
+    "src/**/*.d.ts"
   ]
 }
