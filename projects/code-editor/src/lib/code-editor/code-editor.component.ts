@@ -29,6 +29,7 @@ export interface CodeModelChangedEvent {
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'ngs-code-editor',
+  standalone: true,
   templateUrl: './code-editor.component.html',
   styleUrls: ['./code-editor.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

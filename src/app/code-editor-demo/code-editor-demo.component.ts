@@ -1,17 +1,5 @@
-import {
-  Component,
-  HostBinding,
-  OnInit,
-  ViewChild,
-  ViewEncapsulation
-} from '@angular/core';
-import {
-  CodeEditorComponent,
-  CodeEditorModule,
-  CodeEditorService,
-  CodeModel,
-  CodeModelChangedEvent
-} from '@ngstack/code-editor';
+import { Component, HostBinding, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { CodeEditorComponent, CodeEditorService, CodeModel, CodeModelChangedEvent } from '@ngstack/code-editor';
 import { Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { FileDatabase } from './file-database';
@@ -37,11 +25,11 @@ import { MatOption, MatSelect, MatSelectChange } from '@angular/material/select'
     MatMenuModule,
     MatIconModule,
     MatProgressBarModule,
-    CodeEditorModule,
     MatFormField,
     MatSelect,
     MatOption,
     MatLabel,
+    CodeEditorComponent
   ],
   selector: 'app-code-editor-demo',
   templateUrl: './code-editor-demo.component.html',
@@ -87,13 +75,11 @@ export class CodeEditorDemoComponent implements OnInit {
   selectedFile: FileNode;
 
   constructor(database: FileDatabase, editorService: CodeEditorService) {
-    database.dataChange.subscribe(
-      (data) => {
-        this.files = data;
-        this.selectedFile = this.files[0];
-        this.selectNode(this.selectedFile);
-      }
-    );
+    database.dataChange.subscribe((data) => {
+      this.files = data;
+      this.selectedFile = this.files[0];
+      this.selectNode(this.selectedFile);
+    });
 
     this.isLoading$ = editorService.loadingTypings.pipe(debounceTime(300));
   }

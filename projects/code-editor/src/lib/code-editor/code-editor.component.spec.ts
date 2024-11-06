@@ -2,9 +2,7 @@ import { ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
 
 import { CodeEditorComponent } from './code-editor.component';
 import { CodeEditorService } from '../services/code-editor.service';
-import { TypescriptDefaultsService } from '../services/typescript-defaults.service';
-import { JavascriptDefaultsService } from '../services/javascript-defaults.service';
-import { CodeEditorModule } from '../code-editor.module';
+import { provideCodeEditor } from '../code-editor.module';
 
 describe('CodeEditorComponent', () => {
   let component: CodeEditorComponent;
@@ -13,12 +11,8 @@ describe('CodeEditorComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CodeEditorModule.forRoot({ baseUrl: 'assets/monaco' })],
-      providers: [
-        CodeEditorService,
-        TypescriptDefaultsService,
-        JavascriptDefaultsService
-      ]
+      imports: [CodeEditorComponent],
+      providers: [provideCodeEditor({ baseUrl: 'assets/monaco' })]
     });
 
     codeEditorService = TestBed.inject(CodeEditorService);
