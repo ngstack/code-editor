@@ -11,7 +11,8 @@ describe('CodeEditorComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [provideCodeEditor({ baseUrl: 'assets/monaco' })]
+      imports: [CodeEditorComponent],
+      providers: [provideCodeEditor({ baseUrl: 'assets/monaco' })]
     });
 
     codeEditorService = TestBed.inject(CodeEditorService);
