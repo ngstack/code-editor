@@ -89,7 +89,7 @@ export class CodeEditorDemoComponent implements OnInit {
   constructor(database: FileDatabase, editorService: CodeEditorService) {
     database.dataChange.subscribe(
       (data) => {
-        this.files = database.data;
+        this.files = data;
         this.selectedFile = this.files[0];
         this.selectNode(this.selectedFile);
       }
