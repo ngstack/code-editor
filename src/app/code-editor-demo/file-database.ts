@@ -80,7 +80,7 @@ const FILES_DATA: FileNode[] = [
         code: {
           language: 'javascript',
           uri: 'main.js',
-          dependencies: ['@types/node'],
+          dependencies: [/*'@types/node'*/],
           value: [
             '// JavaScript Example',
             `import * as fs from 'fs';`,
@@ -101,9 +101,9 @@ const FILES_DATA: FileNode[] = [
           language: 'typescript',
           uri: 'main.ts',
           dependencies: [
-            '@types/node',
-            '@ngstack/translate',
-            '@ngstack/code-editor'
+            // '@types/node',
+            // '@ngstack/translate',
+            // '@ngstack/code-editor'
           ],
           value: [
             '// TypeScript Example',
