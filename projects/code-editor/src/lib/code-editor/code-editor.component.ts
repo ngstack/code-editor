@@ -150,20 +150,24 @@ export class CodeEditorComponent
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.codeModel && !changes.codeModel.firstChange) {
-      this.updateModel(changes.codeModel.currentValue);
+    const codeModel = changes['codeModel'];
+    const readOnly = changes['readOnly'];
+    const theme = changes['theme'];
+
+    if (codeModel && !codeModel.firstChange) {
+      this.updateModel(codeModel.currentValue);
     }
 
-    if (changes.readOnly && !changes.readOnly.firstChange) {
+    if (readOnly && !readOnly.firstChange) {
       if (this.editor) {
         this.editor.updateOptions({
-          readOnly: changes.readOnly.currentValue
+          readOnly: readOnly.currentValue
         });
       }
     }
 
-    if (changes.theme && !changes.theme.firstChange) {
-      this.editorService.setTheme(changes.theme.currentValue);
+    if (theme && !theme.firstChange) {
+      this.editorService.setTheme(theme.currentValue);
     }
   }
 
