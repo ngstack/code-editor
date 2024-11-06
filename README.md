@@ -20,10 +20,10 @@ npm install @ngstack/code-editor
 Import `CodeEditorModule` into your main application module:
 
 ```ts
-import { CodeEditorModule } from '@ngstack/code-editor';
+import { provideCodeEditor } from '@ngstack/code-editor';
 
 @NgModule({
-  imports: [CodeEditorModule.forRoot()]
+  providers: [provideCodeEditor()]
 })
 export class AppModule {}
 ```
@@ -34,9 +34,11 @@ If not provided, the component is always going to use the `latest` version.
 > For a full list of Monaco versions and changes, please refer to the official [CHANGELOG.md](https://github.com/microsoft/monaco-editor/blob/main/CHANGELOG.md) file
 
 ```ts
+import { provideCodeEditor } from '@ngstack/code-editor';
+
 @NgModule({
-  imports: [
-    CodeEditorModule.forRoot({
+  providers: [
+    provideCodeEditor({
       editorVersion: '0.44.0'
     })
   ]
@@ -78,7 +80,7 @@ export class AppComponent {
 ## Input Properties
 
 | Name      | Type      | Default Value | Description                                                    |
-| --------- | --------- | ------------- | -------------------------------------------------------------- |
+|-----------|-----------|---------------|----------------------------------------------------------------|
 | theme     | string    | vs            | Editor theme. Supported values: `vs`, `vs-dark` or `hc-black`. |
 | options   | Object    | {...}         | Editor options.                                                |
 | readOnly  | boolean   | false         | Toggles readonly state of the editor.                          |
@@ -297,11 +299,11 @@ Update the `angular.json` file and append the following asset rule:
 Update the main application module and setup the service to use the custom `baseUrl` when application starts:
 
 ```ts
-import { CodeEditorModule } from '@ngstack/code-editor';
+import { provideCodeEditor } from '@ngstack/code-editor';
 
 @NgModule({
-  imports: [
-    CodeEditorModule.forRoot({
+  providers: [
+    provideCodeEditor({
       baseUrl: 'assets/monaco'
     })
   ]
@@ -324,9 +326,11 @@ Update the `angular.json` file and append the following asset rule:
 Then update the `CodeEditorService` configuration at the application startup:
 
 ```ts
+import { provideCodeEditor } from '@ngstack/code-editor';
+
 @NgModule({
-  imports: [
-    CodeEditorModule.forRoot({
+  providers: [
+    provideCodeEditor({
       typingsWorkerUrl: 'assets/workers/typings-worker.js'
     })
   ]
@@ -338,6 +342,6 @@ export class AppModule {}
 
 To enable Lazy Loading
 use `CodeEditorModule.forRoot()` in the main application,
-and `CodeEditorModule.forChild()` in all lazy-loaded feature modules.
+and `CodeEditorModule` in all lazy-loaded feature modules.
 
 For more details please refer to [Lazy Loading Feature Modules](https://angular.io/guide/lazy-loading-ngmodules)

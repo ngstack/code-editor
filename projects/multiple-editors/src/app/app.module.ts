@@ -1,21 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CodeEditorModule } from '@ngstack/code-editor';
-
+import { provideCodeEditor } from '@ngstack/code-editor';
 import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    CodeEditorModule.forRoot({
+  imports: [BrowserModule],
+  providers: [
+    provideCodeEditor({
       // use local Monaco installation
       baseUrl: 'assets/monaco',
       // use local Typings Worker
-      typingsWorkerUrl: 'assets/workers/typings-worker.js',
-    }),
+      typingsWorkerUrl: 'assets/workers/typings-worker.js'
+    })
   ],
-  providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
