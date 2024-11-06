@@ -1,4 +1,3 @@
-import { NestedTreeControl } from '@angular/cdk/tree';
 import {
   Component,
   HostBinding,
@@ -6,7 +5,6 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import { MatTreeModule, MatTreeNestedDataSource } from '@angular/material/tree';
 import {
   CodeEditorComponent,
   CodeEditorModule,
@@ -17,7 +15,7 @@ import {
 import { Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { FileDatabase } from './file-database';
-import { FileNode, FileNodeType } from './file-node';
+import { FileNode } from './file-node';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
@@ -25,6 +23,8 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { editor } from 'monaco-editor';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatOption, MatSelect, MatSelectChange } from '@angular/material/select';
 
 @Component({
   standalone: true,
@@ -37,8 +37,11 @@ import { editor } from 'monaco-editor';
     MatMenuModule,
     MatIconModule,
     MatProgressBarModule,
-    MatTreeModule,
-    CodeEditorModule
+    CodeEditorModule,
+    MatFormField,
+    MatSelect,
+    MatOption,
+    MatLabel,
   ],
   selector: 'app-code-editor-demo',
   templateUrl: './code-editor-demo.component.html',
@@ -47,9 +50,6 @@ import { editor } from 'monaco-editor';
   providers: [FileDatabase]
 })
 export class CodeEditorDemoComponent implements OnInit {
-  nestedTreeControl: NestedTreeControl<FileNode>;
-  nestedDataSource: MatTreeNestedDataSource<FileNode>;
-
   themes = [
     { name: 'Visual Studio', value: 'vs' },
     { name: 'Visual Studio Dark', value: 'vs-dark' },
@@ -83,34 +83,23 @@ export class CodeEditorDemoComponent implements OnInit {
     }
   };
 
-  constructor(database: FileDatabase, editorService: CodeEditorService) {
-    this.nestedTreeControl = new NestedTreeControl<FileNode>(this._getChildren);
-    this.nestedDataSource = new MatTreeNestedDataSource();
+  files: FileNode[];
+  selectedFile: FileNode;
 
+  constructor(database: FileDatabase, editorService: CodeEditorService) {
     database.dataChange.subscribe(
-      (data) => (this.nestedDataSource.data = data)
+      (data) => {
+        this.files = data;
+        this.selectedFile = this.files[0];
+        this.selectNode(this.selectedFile);
+      }
     );
 
     this.isLoading$ = editorService.loadingTypings.pipe(debounceTime(300));
   }
 
-  hasNestedChild(_: number, nodeData: FileNode): boolean {
-    return nodeData.type === FileNodeType.folder;
-  }
-
-  private _getChildren = (node: FileNode) => node.children;
-
   onCodeChanged(value) {
     // console.log('CODE', value);
-  }
-
-  isNodeSelected(node: FileNode): boolean {
-    return (
-      node &&
-      node.code &&
-      this.selectedModel &&
-      node.code === this.selectedModel
-    );
   }
 
   selectNode(node: FileNode) {
@@ -140,5 +129,10 @@ export class CodeEditorDemoComponent implements OnInit {
     setTimeout(() => {
       event.sender.formatDocument();
     }, 100);
+  }
+
+  onSelectionChange($event: MatSelectChange) {
+    const fileNode = $event.value as FileNode;
+    this.selectNode(fileNode);
   }
 }

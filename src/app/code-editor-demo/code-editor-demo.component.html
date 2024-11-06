@@ -16,79 +16,18 @@
   <button mat-icon-button title="Format code" (click)="codeEditor?.formatDocument()">
     <mat-icon>format_align_left</mat-icon>
   </button>
+
+  <mat-form-field>
+    <mat-label>Example</mat-label>
+    <mat-select [(value)]="selectedFile" (selectionChange)="onSelectionChange($event)">
+      @for (file of files; track file) {
+        <mat-option [value]="file">{{file.name}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
 </mat-toolbar>
 
 <div class="page-layout">
-  <div class="page-layout-sidebar">
-    <div class="file-tree-container">
-      <mat-tree
-        [dataSource]="nestedDataSource"
-        [treeControl]="nestedTreeControl"
-        class="file-tree"
-      >
-        <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
-          <li class="mat-tree-node">
-            <button mat-icon-button disabled></button>
-            <div
-              class="file-node-label"
-              [attr.title]="node.name"
-              [style.color]="isNodeSelected(node) ? 'blueviolet' : 'black'"
-              (click)="selectNode(node)"
-            >
-              <mat-icon
-                *ngIf="node.type === 'file'"
-                class="file-node-label__icon"
-                >description</mat-icon
-              >
-              <span class="file-node-label__text">{{ node.name }}</span>
-            </div>
-          </li>
-        </mat-tree-node>
-
-        <mat-nested-tree-node *matTreeNodeDef="let node; when: hasNestedChild">
-          <li>
-            <div class="mat-tree-node">
-              <button
-                mat-icon-button
-                matTreeNodeToggle
-                [attr.aria-label]="'toggle ' + node.name"
-              >
-                <mat-icon class="mat-icon-rtl-mirror">
-                  {{
-                    nestedTreeControl.isExpanded(node)
-                      ? 'expand_more'
-                      : 'chevron_right'
-                  }}
-                </mat-icon>
-              </button>
-              <div
-                class="file-node-label"
-                [attr.title]="node.name"
-                (click)="nestedTreeControl.toggle(node)"
-              >
-                <mat-icon
-                  *ngIf="node.type === 'folder'"
-                  class="file-node-label__icon"
-                >
-                  {{
-                    nestedTreeControl.isExpanded(node)
-                      ? 'folder_open'
-                      : 'folder'
-                  }}
-                </mat-icon>
-                <span class="file-node-label__text">{{ node.name }}</span>
-              </div>
-            </div>
-            <ul
-              [class.file-tree-invisible]="!nestedTreeControl.isExpanded(node)"
-            >
-              <ng-container matTreeNodeOutlet></ng-container>
-            </ul>
-          </li>
-        </mat-nested-tree-node>
-      </mat-tree>
-    </div>
-  </div>
   <div class="page-layout-content">
     <ng-container *ngIf="selectedModel">
       <mat-progress-bar *ngIf="isLoading$ | async" mode="indeterminate">
@@ -100,8 +39,7 @@
         (valueChanged)="onCodeChanged($event)"
         (loaded)="onEditorLoaded($event)"
         (codeModelChanged)="onCodeModelChanged($event)"
-      >
-      </ngs-code-editor>
+      />
     </ng-container>
   </div>
 </div>
