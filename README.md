@@ -119,7 +119,7 @@ The following options are used by default when Editor Component gets created:
 ## Output Events
 
 | Name                | Argument Type               | Description                                                                    |
-| ------------------- | --------------------------- | ------------------------------------------------------------------------------ |
+|---------------------|-----------------------------|--------------------------------------------------------------------------------|
 | loaded              |                             | Raised when editor finished loading all its components.                        |
 | valueChanged        | string                      | An event emitted when the text content of the model have changed.              |
 | modelContentChanged | `IModelContentChangedEvent` | An event emitted when the contents of the underlying editor model have changed |
@@ -128,7 +128,7 @@ The following options are used by default when Editor Component gets created:
 ## Component API
 
 | Name                | Description                                                                                                                                         |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
 | editor              | returns the instance of the underlying Monaco [ICodeEditor](https://microsoft.github.io/monaco-editor/docs.html#interfaces/editor.ICodeEditor.html) |
 | runAction(id, args) | runs the editor actions, for example `editor.action.formatDocument`                                                                                 |
 | formatDocument()    | shortcut function to format the document                                                                                                            |
@@ -138,7 +138,7 @@ The following options are used by default when Editor Component gets created:
 The component comes with a separate `CodeEditorService` service that provides additional APIs for the underlying `monaco` editor:
 
 | Name                | Description                                           |
-| ------------------- | ----------------------------------------------------- |
+|---------------------|-------------------------------------------------------|
 | monaco              | get the global monaco instance                        |
 | typingsLoaded       | An event emitted when code typings are loaded         |
 | loaded              | An event emitted when the `monaco` instance is loaded |
@@ -151,7 +151,7 @@ The editor is able to resolve typing libraries when set to the `Typescript` or `
 Use `dependencies` property to provide a list of libraries to resolve
 
 ```html
-<ngs-code-editor [codeModel]="model" ...> </ngs-code-editor>
+<ngs-code-editor [codeModel]="model"> </ngs-code-editor>
 ```
 
 And in the controller class:
@@ -189,7 +189,7 @@ You should have all the types resolved and auto-completion working.
 You can associate multiple schemas when working with JSON files.
 
 ```html
-<ngs-code-editor [codeModel]="model" ...> </ngs-code-editor>
+<ngs-code-editor [codeModel]="model"></ngs-code-editor>
 ```
 
 Provide the required schemas like in the example below.
@@ -224,6 +224,7 @@ The schemas get automatically installed and associated with the corresponding fi
 You can access the Code Editor component instance API from other components when using with the `@ViewChild`:
 
 ```ts
+class MyComponent {
   private _codeEditor: CodeEditorComponent;
 
   @ViewChild(CodeEditorComponent, { static: false })
@@ -234,6 +235,7 @@ You can access the Code Editor component instance API from other components when
   get codeEditor(): CodeEditorComponent {
     return this._codeEditor;
   }
+}
 ```
 
 The code above allows you to use the code editor within the `*ngIf`, for example:
@@ -261,10 +263,12 @@ Other components can now have access to the editor instance:
 ```ts
 import { CodeModelChangedEvent } from '@ngstack/code-editor';
 
-onCodeModelChanged(event: CodeModelChangedEvent) {
-  setTimeout(() => {
-    event.sender.formatDocument();
-  }, 100);
+class MyComponent {
+  onCodeModelChanged(event: CodeModelChangedEvent) {
+    setTimeout(() => {
+      event.sender.formatDocument();
+    }, 100);
+  }
 }
 ```
 
@@ -309,7 +313,7 @@ export class AppModule {}
 
 Update the `angular.json` file and append the following asset rule:
 
-```ts
+```json
 {
   "glob": "**/*.js",
   "input": "../node_modules/@ngstack/code-editor/workers",
