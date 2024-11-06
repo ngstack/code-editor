@@ -136,9 +136,7 @@ export class FileDatabase {
   }
 
   initialize() {
-    const data = FILES_DATA;
-
     // Notify the change.
-    this.dataChange.next(data);
+    this.dataChange.next(FILES_DATA);
   }
 }
