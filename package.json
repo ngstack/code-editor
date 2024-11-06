@@ -9,7 +9,6 @@
     "build": "ng build app",
     "test": "ng test code-editor --browsers=ChromeHeadless",
     "lint": "ng lint",
-    "spellcheck": "cspell 'src/**/*.ts' 'e2e/**/*.ts' 'projects/**/*.ts'",
     "build:lib": "ng build code-editor && cp -R projects/code-editor/src/lib/workers dist/@ngstack/code-editor",
     "build:prod": "ng build code-editor --configuration production && cp -R projects/code-editor/src/lib/workers dist/@ngstack/code-editor",
     "test:ci": "ng test code-editor --watch=false --browsers=ChromeHeadless"
@@ -44,7 +43,6 @@
     "@types/jasmine": "~5.1.4",
     "@typescript-eslint/eslint-plugin": "^7.17.0",
     "@typescript-eslint/parser": "^7.17.0",
-    "cspell": "^8.11.0",
     "eslint": "^8.57.0",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.3",
