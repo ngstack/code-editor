@@ -25,7 +25,7 @@
     "@angular/platform-browser": "^18.2.10",
     "@angular/platform-browser-dynamic": "^18.2.10",
     "@angular/router": "^18.2.10",
-    "monaco-editor": "^0.50.0",
+    "monaco-editor": "^0.52.0",
     "rxjs": "^7.8.0",
     "tslib": "^2.5.0",
     "zone.js": "~0.14.10"
